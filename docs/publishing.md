@@ -34,7 +34,7 @@ The `release` workflow builds the sdist and wheel and uploads them. Afterwards:
 uv tool install unwedge        # or pipx / pip
 ```
 
-Before the first PyPI release, users can install from GitHub:
+The latest unreleased code installs from GitHub:
 `uv tool install git+https://github.com/umithavare/unwedge`.
 
 ## 3. Claude Code plugin

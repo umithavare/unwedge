@@ -52,7 +52,7 @@ the session's spend came after unwedge's first hint.
 ## Quick start
 
 ```bash
-uv tool install git+https://github.com/umithavare/unwedge   # PyPI (soon): uv tool install unwedge
+uv tool install unwedge   # or: pipx install unwedge / pip install unwedge
 unwedge scan        # replay your recent Claude Code and Codex sessions and flag loops; free, local
 unwedge doctor      # check settings and the provider
 ```

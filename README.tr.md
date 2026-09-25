@@ -52,7 +52,7 @@ reddedildi; oturum harcamasının %94'ü unwedge'in ilk ipucundan sonra yapıld�
 ## Hızlı başlangıç
 
 ```bash
-uv tool install git+https://github.com/umithavare/unwedge   # PyPI (yakında): uv tool install unwedge
+uv tool install unwedge   # ya da: pipx install unwedge / pip install unwedge
 unwedge scan        # son Claude Code ve Codex oturumlarınızı tarar, döngüleri işaretler; ücretsiz, yerel
 unwedge doctor      # ayarları ve sağlayıcıyı kontrol eder
 ```

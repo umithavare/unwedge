@@ -5,13 +5,11 @@ checked for doom loops, and depending on the mode a short hint is added to Claud
 
 ## 1. Install the CLI
 
-The hooks call a `unwedge` executable, so it must be on your `PATH`:
+The hooks call an `unwedge` executable, so it must be on your `PATH`:
 
 ```bash
 uv tool install unwedge          # or: pipx install unwedge / pip install unwedge
-# before the first PyPI release:
-uv tool install git+https://github.com/umithavare/unwedge
-unwedge doctor                         # checks PATH, settings and the provider
+unwedge doctor                   # checks PATH, settings and the provider
 ```
 
 ## 2a. Install the plugin (recommended)
