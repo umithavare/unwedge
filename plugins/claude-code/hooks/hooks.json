@@ -1,0 +1,17 @@
+{
+  "description": "unwedge records every tool call and checks the session for doom loops. All hooks run in the background (async), so they add no latency; in hint mode the hint reaches Claude on its next step.",
+  "hooks": {
+    "SessionStart": [
+      { "hooks": [{ "type": "command", "command": "unwedge", "args": ["hook"], "async": true }] }
+    ],
+    "UserPromptSubmit": [
+      { "hooks": [{ "type": "command", "command": "unwedge", "args": ["hook"], "async": true }] }
+    ],
+    "PostToolUse": [
+      { "hooks": [{ "type": "command", "command": "unwedge", "args": ["hook"], "async": true }] }
+    ],
+    "PostToolUseFailure": [
+      { "hooks": [{ "type": "command", "command": "unwedge", "args": ["hook"], "async": true }] }
+    ]
+  }
+}

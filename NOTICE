@@ -1,0 +1,12 @@
+unwedge (unwedge)
+Copyright 2026 umithavare
+
+This product is licensed under the Apache License, Version 2.0 (see LICENSE).
+
+The benchmark samples trajectories from the public Hugging Face dataset
+nebius/SWE-agent-trajectories; the data is downloaded by benchmarks/fetch_trajectories.py
+and is not redistributed in this repository.
+
+TypeSafe and jev are products of TypeSafe AI. Laya is by Convai Innovations; laya-mlx is an
+independent MLX port. This project is independent and not affiliated with or endorsed by any
+of them.

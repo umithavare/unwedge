@@ -1,0 +1,14 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "unwedge",
+  "version": "0.1.0",
+  "description": "Circuit breaker for doom loops in Codex: spots repeated failing commands, rereading and stalled progress, logs them and can add a short hint to the model's context. Needs the unwedge CLI on PATH (uv tool install unwedge).",
+  "author": {
+    "name": "umithavare",
+    "url": "https://github.com/umithavare"
+  },
+  "homepage": "https://github.com/umithavare/unwedge",
+  "repository": "https://github.com/umithavare/unwedge",
+  "license": "Apache-2.0",
+  "keywords": ["doom-loop", "circuit-breaker", "cost", "hooks"]
+}

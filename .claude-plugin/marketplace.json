@@ -1,0 +1,21 @@
+{
+  "name": "unwedge",
+  "owner": {
+    "name": "umithavare",
+    "url": "https://github.com/umithavare"
+  },
+  "metadata": {
+    "description": "unwedge: a circuit breaker for AI agent doom loops.",
+    "version": "0.1.0"
+  },
+  "plugins": [
+    {
+      "name": "unwedge",
+      "source": "./plugins/claude-code",
+      "description": "Spots doom loops (repeated failing commands, rereading, stalled progress) and logs them or hints Claude. Needs the unwedge CLI: uv tool install unwedge.",
+      "version": "0.1.0",
+      "license": "Apache-2.0",
+      "keywords": ["doom-loop", "circuit-breaker", "cost", "hooks"]
+    }
+  ]
+}

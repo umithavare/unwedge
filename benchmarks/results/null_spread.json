@@ -1,0 +1,28 @@
+{
+  "stall": {
+    "mean_range": 0.06499999999999999,
+    "max_range": 0.22000000000000003
+  },
+  "p0": {
+    "mean_range": 0.022,
+    "max_range": 0.07
+  },
+  "progress": {
+    "mean_range": 0.10100000000000005,
+    "max_range": 0.17999999999999994
+  },
+  "terminal": {
+    "mean_range": 0.015000000000000003,
+    "max_range": 0.04000000000000001
+  },
+  "drift": {
+    "mean_range": 0.027999999999999997,
+    "max_range": 0.07
+  },
+  "gate": {
+    "mean_range": 0.05900000000000001,
+    "max_range": 0.1
+  },
+  "_states": 10,
+  "_repeats": 10
+}

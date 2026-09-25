@@ -1,0 +1,55 @@
+{
+  "name": "unwedge",
+  "displayName": "unwedge",
+  "version": "0.1.0",
+  "description": "Circuit breaker for doom loops: spots repeated failing commands, rereading and stalled progress, logs them and can add a short hint to Claude's context. Needs the unwedge CLI on PATH (uv tool install unwedge).",
+  "author": {
+    "name": "umithavare",
+    "url": "https://github.com/umithavare"
+  },
+  "homepage": "https://github.com/umithavare/unwedge",
+  "repository": "https://github.com/umithavare/unwedge",
+  "license": "Apache-2.0",
+  "keywords": [
+    "doom-loop",
+    "circuit-breaker",
+    "cost",
+    "hooks",
+    "agents",
+    "jev",
+    "laya"
+  ],
+  "userConfig": {
+    "mode": {
+      "type": "string",
+      "title": "Mode",
+      "description": "shadow = only record (see `unwedge report`); hint = also add a short hint to Claude's context when a loop is detected. (stop needs a synchronous hook in settings.json; see the docs)",
+      "default": "shadow"
+    },
+    "provider": {
+      "type": "string",
+      "title": "Judgment provider",
+      "description": "none = code-only checks (free, local); jev = TypeSafe jev (needs the API key below); laya = a local Laya server (laya-serve or unwedge serve).",
+      "default": "none"
+    },
+    "typesafe_api_key": {
+      "type": "string",
+      "title": "TypeSafe API key",
+      "description": "Only used when the provider is jev.",
+      "sensitive": true,
+      "required": false
+    },
+    "laya_url": {
+      "type": "string",
+      "title": "Laya endpoint",
+      "description": "Only used when the provider is laya.",
+      "default": "http://127.0.0.1:8000/v1/systemone"
+    },
+    "laya_model": {
+      "type": "string",
+      "title": "Laya checkpoint",
+      "description": "english (default, 512 tokens), multilingual (for non-English sessions) or typed-decisions.",
+      "default": "english"
+    }
+  }
+}

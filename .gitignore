@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.venv/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+htmlcov/
+.coverage
+
+# benchmark data (re-fetch with benchmarks/fetch_trajectories.py) and raw per-turn outputs
+benchmarks/data/
+benchmarks/results/*.jsonl
+benchmarks/results/*.log
+
+# local model weights and servers
+models/
+.laya/
+
+# editors / OS
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db

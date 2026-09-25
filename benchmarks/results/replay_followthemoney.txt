@@ -1,0 +1,62 @@
+session alephdata__followthemoney-871  group=success  resolved=True  turns=54  exit=submitted (exit_context)
+
+T1 open followthemoney/types/email.py 71 -> shows /followthemoney/followthemon | not gated                          |      1 ms | continue
+T2 edit 71:71 (+5 lines) -> edit applied                                       | not gated                          |      1 ms | continue
+T3 create test_email.py -> edit applied                                        | not gated                          |      0 ms | continue
+T4 edit 1:1 (+20 lines) -> edit applied                                        | not gated                          |      1 ms | continue
+T5 python test_email.py -> ERROR AssertionError: Email address should be consi | not gated                          |      0 ms | continue
+T6 open followthemoney/types/email.py 71 -> shows /followthemoney/followthemon | fail-open: ProviderTimeout: no answer within 0.50s |    545 ms | continue
+T7 open test_email.py -> shows /followthemoney/test_email.py lines 1-19 of 19  | not gated                          |      1 ms | continue
+T8 edit 9:9 (+2 lines) -> edit applied                                         | S=0.65 P0=0.08 T=0.07 G=0.26       |    330 ms | continue
+T9 python test_email.py -> ERROR AssertionError: Email address should be consi | S=0.86 P0=0.11 T=0.04 G=0.14       |    288 ms | continue
+T10 open followthemoney/types/email.py 71 -> shows /followthemoney/followthemo | S=0.72 P0=0.10 T=0.25 G=0.11       |    307 ms | continue
+T11 open test_email.py -> shows /followthemoney/test_email.py lines 1-19 of 19 | S=0.77 P0=0.07 T=0.28 G=0.17       |    296 ms | cascade
+T12 edit 9:9 (+2 lines) -> edit applied                                        | S=0.81 P0=0.17 T=0.06 G=0.25       |    320 ms | continue
+T13 python test_email.py -> ERROR AssertionError: Email address should be cons | S=0.86 P0=0.36 T=0.04 G=0.15       |    287 ms | continue
+T14 open followthemoney/types/email.py 71 -> shows /followthemoney/followthemo | S=0.74 P0=0.22 T=0.34 G=0.13       |    265 ms | cascade
+T15 open test_email.py -> shows /followthemoney/test_email.py lines 1-19 of 19 | S=0.85 P0=0.20 T=0.40 G=0.18       |    323 ms | continue
+T16 edit 9:9 (+2 lines) -> edit applied                                        | S=0.90 P0=0.55 T=0.04 G=0.27       |    281 ms | continue
+T17 python test_email.py -> ERROR AssertionError: Email address should be cons | S=0.86 P0=0.52 T=0.02 G=0.13       |    332 ms | cascade
+T18 open followthemoney/types/email.py 71 -> shows /followthemoney/followthemo | S=0.80 P0=0.21 T=0.36 G=0.13       |    318 ms | continue
+T19 open test_email.py -> shows /followthemoney/test_email.py lines 1-19 of 19 | S=0.84 P0=0.24 T=0.41 G=0.16       |    305 ms | continue
+T20 edit 9:9 (+2 lines) -> edit applied                                        | S=0.89 P0=0.54 T=0.04 G=0.29       |    314 ms | cascade
+T21 python test_email.py -> ERROR AssertionError: Email address should be cons | S=0.87 P0=0.51 T=0.02 G=0.20       |    588 ms | hint  <<<
+                                                                                hint [H03_error_text_ignored]: Read the last error message literally and address exactly what it names before trying anything else.
+T22 open followthemoney/types/email.py 71 -> shows /followthemoney/followthemo | S=0.74 P0=0.24 T=0.32 G=0.12       |    275 ms | continue
+T23 open test_email.py -> shows /followthemoney/test_email.py lines 1-19 of 19 | S=0.82 P0=0.17 T=0.41 G=0.16       |    323 ms | cascade
+T24 edit 9:9 (+2 lines) -> edit applied                                        | S=0.91 P0=0.47 T=0.04 G=0.21       |    375 ms | continue
+T25 python test_email.py -> ERROR AssertionError: Email address should be cons | S=0.86 P0=0.53 T=0.02 G=0.17       |    568 ms | hint  <<<
+                                                                                hint [H03_error_text_ignored]: Read the last error message literally and address exactly what it names before trying anything else.
+T26 open followthemoney/types/email.py 71 -> shows /followthemoney/followthemo | S=0.76 P0=0.22 T=0.37 G=0.13       |    286 ms | cascade
+T27 open test_email.py -> shows /followthemoney/test_email.py lines 1-19 of 19 | S=0.85 P0=0.18 T=0.41 G=0.18       |    293 ms | continue
+T28 edit 9:9 (+2 lines) -> edit applied                                        | S=0.91 P0=0.48 T=0.04 G=0.23       |    343 ms | continue
+T29 python test_email.py -> ERROR AssertionError: Email address should be cons | S=0.86 P0=0.50 T=0.02 G=0.14       |    292 ms | escalate  <<<
+T30 open followthemoney/types/email.py 71 -> shows /followthemoney/followthemo | S=0.76 P0=0.22 T=0.37 G=0.13       |    279 ms | continue
+T31 open test_email.py -> shows /followthemoney/test_email.py lines 1-19 of 19 | S=0.83 P0=0.20 T=0.38 G=0.18       |    327 ms | continue
+T32 edit 9:9 (+2 lines) -> edit applied                                        | S=0.90 P0=0.52 T=0.04 G=0.26       |    268 ms | cascade
+T33 python test_email.py -> ERROR AssertionError: Email address should be cons | S=0.85 P0=0.56 T=0.02 G=0.17       |    292 ms | continue
+T34 open followthemoney/types/email.py 71 -> shows /followthemoney/followthemo | S=0.76 P0=0.22 T=0.34 G=0.12       |    305 ms | continue
+T35 open test_email.py -> shows /followthemoney/test_email.py lines 1-19 of 19 | S=0.80 P0=0.22 T=0.38 G=0.18       |    423 ms | cascade
+T36 edit 9:9 (+2 lines) -> edit applied                                        | S=0.89 P0=0.50 T=0.04 G=0.26       |    303 ms | continue
+T37 python test_email.py -> ERROR AssertionError: Email address should be cons | S=0.88 P0=0.49 T=0.02 G=0.16       |    281 ms | escalate  <<<
+T38 open followthemoney/types/email.py 71 -> shows /followthemoney/followthemo | S=0.80 P0=0.24 T=0.34 G=0.12       |    316 ms | cascade
+T39 open test_email.py -> shows /followthemoney/test_email.py lines 1-19 of 19 | S=0.88 P0=0.19 T=0.40 G=0.17       |    324 ms | continue
+T40 edit 9:9 (+2 lines) -> edit applied                                        | S=0.89 P0=0.52 T=0.04 G=0.24       |    319 ms | continue
+T41 python test_email.py -> ERROR AssertionError: Email address should be cons | S=0.87 P0=0.52 T=0.02 G=0.15       |    287 ms | cascade
+T42 open followthemoney/types/email.py 71 -> shows /followthemoney/followthemo | S=0.79 P0=0.23 T=0.34 G=0.12       |    291 ms | continue
+T43 open test_email.py -> shows /followthemoney/test_email.py lines 1-19 of 19 | fail-open: ProviderTimeout: no answer within 0.50s |    502 ms | continue
+T44 edit 9:9 (+2 lines) -> edit applied                                        | S=0.90 P0=0.55 T=0.04 G=0.26       |    320 ms | continue
+T45 python test_email.py -> ERROR AssertionError: Email address should be cons | S=0.85 P0=0.50 T=0.03 G=0.15       |    310 ms | escalate  <<<
+T46 open followthemoney/types/email.py 71 -> shows /followthemoney/followthemo | S=0.78 P0=0.25 T=0.31 G=0.13       |    297 ms | continue
+T47 open test_email.py -> shows /followthemoney/test_email.py lines 1-19 of 19 | S=0.85 P0=0.19 T=0.39 G=0.20       |    298 ms | continue
+T48 edit 9:9 (+2 lines) -> edit applied                                        | S=0.90 P0=0.50 T=0.04 G=0.25       |    292 ms | cascade
+T49 python test_email.py -> ERROR AssertionError: Email address should be cons | S=0.85 P0=0.51 T=0.02 G=0.17       |    280 ms | continue
+T50 open followthemoney/types/email.py 71 -> shows /followthemoney/followthemo | S=0.76 P0=0.20 T=0.37 G=0.13       |    324 ms | continue
+T51 open test_email.py -> shows /followthemoney/test_email.py lines 1-19 of 19 | fail-open: ProviderTimeout: no answer within 0.50s |    515 ms | continue
+T52 edit 9:9 (+2 lines) -> edit applied                                        | S=0.88 P0=0.53 T=0.04 G=0.23       |    345 ms | cascade
+T53 python test_email.py -> ERROR AssertionError: Email address should be cons | S=0.87 P0=0.53 T=0.03 G=0.17       |    274 ms | escalate  <<<
+T54 open followthemoney/types/email.py 71 -> ok (no output)                    | S=0.77 P0=0.43 T=0.03 G=0.14       |    274 ms | continue
+
+first intervention: turn 21 of 54; agent spend after it: 82% of the session
+guard wall-clock on gated turns: p50 307 ms, max 588 ms over 48 calls; provider spend $0.00464
+ledger: benchmarks/results/replay_alephdata__followthemoney-871.jsonl
