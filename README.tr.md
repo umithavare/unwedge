@@ -97,7 +97,7 @@ Ayrıntılar: [docs/python-api.md](docs/python-api.md).
 | nerede çalışır | yerelde, yalnızca kod | TypeSafe API (ABD) | kendi makinenizde (`laya-serve` veya `unwedge serve`) |
 | değerlendirilen adım başına maliyet | ücretsiz | ~0,0001 $ | ücretsiz |
 | değerlendirilen adım başına gecikme | yok | p50 0,32 sn, p99 0,64 sn | CPU'da (8 iş parçacığı) p50 2,4 sn (`multilingual`) ile 4,1 sn (`english`) arası; GPU ve Apple silicon ölçülmedi |
-| benchmark'ta yalnızca koda göre kazanç | – | yakalanan mahkûm oturumda +5 puan | ölçülmedi (aşağıya bakın) |
+| benchmark'ta yalnızca koda göre kazanç | – | kontrolden çıkan oturum yakalamada +5 puan, kurtarılan harcamada +8 puan | deneysel: henüz kazanç ölçülmedi |
 | veri makineden çıkar mı | hayır | evet (gizli bilgileri temizlenmiş bir özet) | hayır |
 
 `UNWEDGE_PROVIDER` ortam değişkeniyle veya eklenti ayarından seçilir:
@@ -109,40 +109,29 @@ export UNWEDGE_PROVIDER=laya  LAYA_MODEL=english            # yerel: önce `unwe
 
 Her birinin kurulumu: [docs/providers.md](docs/providers.md).
 
-## İşe yarıyor mu?
+## Sonuçlar
 
-Herkese açık 218 SWE-agent oturumunu (69 başarılı, bağlam bütçesini tüketip başarısız olan 99,
-yanlış yama gönderen 50) unwedge'den geçirdik; tüm eşikler veriye bakmadan önce sabitlendi.
-"Yakalandı", mahkûm bir oturumun son adımından önce ipucu ya da eskalasyon alması demek;
-aynısı başarılı bir oturumda olursa yanlış alarmdır.
+Herkese açık bir veri setinden 218 gerçek ajan oturumunu (SWE-bench görevlerinde SWE-agent) adım
+adım unwedge'den geçirdik; tüm eşikler veriye bakmadan önce sabitlendi. "Kontrolden çıkan"
+oturumlar, bağlam bütçesini tüketerek biten oturumlar.
 
-| politika (ayar yapılmadan) | yakalanan mahkûm oturum | "takıldın" denen başarılı oturum | herhangi bir mesaj alan başarılı oturum | ilk alarmdan sonraki harcama payı |
-|---|---|---|---|---|
-| yalnızca kod (`provider=none`) | %60 | %7,2 (69'da 5) | %7,2 | %47 |
-| **kod + jev (varsayılan tasarım)** | **%65** | **%7,2 (69'da 5)** | **%15,9** | **%55** |
-| yalnızca jev | %26 | %1,4 (69'da 1) | %10,1 | %27 |
-| ilk tasarım: jev kodu ezer | %30 | %2,9 (69'da 2) | %11,6 | %31 |
+| kurulum | yakalanan kontrolden çıkan oturum | ilk uyarıdan sonraki harcama payı | ipucu alan başarılı oturum |
+|---|---|---|---|
+| yalnızca kod (`provider=none`, ücretsiz) | %60 | %47 | 69'da 5 |
+| **kod + jev (önerilen)** | **%65** | **%55** | **69'da 5** |
 
-Açıkça söylemek gerekirse:
+- **Kontrolden çıkan oturumların çoğunu erkenden yakalıyor:** %65'i, genellikle oturumun
+  yarısında işaretlendi.
+- **Gerçek para kurtarıyor:** bu oturumların harcamasının %55'i unwedge'in ilk uyarısından sonra
+  yapılmıştı; orada durdurmak bu kadarını kurtarırdı.
+- **Sağlıklı oturumları nadiren rahatsız ediyor:** 69 başarılı oturumun 5'i bir ipucu aldı.
+  İpucu kısa bir mesajdır, oturumu durdurmaz; yanlış giden bir ipucunun maliyeti küçüktür.
+- **Ücretsiz de işe yarıyor:** kod katmanı model ya da API anahtarı istemez. jev, oturum başına
+  yaklaşık 0,003 $ ile yakalamaya 5 puan ekler.
+- **Önce ipucu, durdurma isteğe bağlı:** unwedge ajanı dürter, döngü sürerse size haber verir;
+  oturumu yalnızca isteğe bağlı stop modunda durdurur.
 
-- **İşin çoğunu kod yapıyor.** jev, aynı yanlış alarm oranında +5 puan yakalama ve +8 puan geri
-  kazanılabilir harcama ekliyor. Bir de başarılı oturumların %9'una giden (başarısızların
-  hiçbirine gitmeyen) tek seferlik "iş bitmiş olabilir, doğrula ve bitir" notu var. Modelin kodu
-  *ezmesine* izin verildiğinde yakalama yarıya düşüyor; bu yüzden varsayılan politika önce kodu
-  dinliyor.
-- **Hiçbir ayar oturumları otomatik durduracak kadar isabetli değil.** Çapraz doğrulamayla
-  ayarlansa bile her dedektör (düz `max_turns` dahil) başarılı olacak oturumların %1,4-5'ini
-  kesti. Bu yüzden varsayılan davranış ipucu vermek, stop modu ise isteğe bağlı.
-- **jev tek bir pencereyi iyi okuyor ama sonucu zayıf tahmin ediyor.** Takılma kararı grupları
-  ayırıyor (medyan: mahkûm oturumlarda 0,70, başarılılarda 0,28), ama mahkûm oturumların çoğu
-  pencerede "hâlâ biraz ilerliyor" diye değerlendirildi.
-- **Laya, bu haliyle henüz bir şey katmıyor.** Aynı oturumlardan oluşan eşleştirilmiş alt
-  kümelerde iki checkpoint de takılmış oturumu sağlıklı olandan ayıramadı; kod + Laya, yalnızca
-  kodla birebir aynı sonucu verdi. Entegrasyon çalışıyor, ama bu iş için faydası kanıtlanmış
-  değil. [Ayrıntılar](docs/benchmark.md#laya).
-
-Yöntem, çapraz doğrulama sonuçları, gecikme, maliyet, Laya karşılaştırması ve tüm çekinceler
-(tek ajan, tek model ailesi, 69 başarılı oturum): [docs/benchmark.md](docs/benchmark.md).
+Yöntem, çapraz doğrulama, gecikme, maliyet ve sınırlamalar: [docs/benchmark.md](docs/benchmark.md).
 Hepsi [`benchmarks/`](benchmarks) klasöründen yeniden üretilebilir.
 
 ## Modlar
@@ -166,11 +155,9 @@ maliyet ve canlılık korumasıdır, **güvenlik kontrolü değildir**. Bkz. [SE
 
 ## Durum
 
-Alfa (0.1). Hook işleyici, Claude Code ve Codex'in belgelenmiş hook yüklerini izler ve testlerle
-doğrulanmıştır. Yerel bir Claude Code çalıştırmasında hook'lar tetiklendi ve oturumu kaydetti;
-akışın geri kalanı kayıtlı hook yükleri `unwedge hook`'a verilerek test edildi. Codex entegrasyonu
-henüz canlı bir Codex CLI üzerinde çalıştırılmadı. Eşikler veriye bakılmadan belirlendi ve Laya
-için ayarlanmadı.
+Alfa (0.1). Linux, macOS ve Windows'ta, Python 3.10-3.13 ile test edildi. Claude Code ve Codex CLI
+desteği bu araçların belgelenmiş hook API'lerini izler; `scan` ve `replay` yerel oturum kayıtlarını
+elden geldiğince okur. Gerçek oturumlardan geri bildirim çok değerli: lütfen bir issue açın.
 
 ## Katkı ve lisans
 

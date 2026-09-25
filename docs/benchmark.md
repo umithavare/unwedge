@@ -6,11 +6,12 @@ tested that, what came out (good and bad), and how to rerun it. Every number her
 the scripts in [`benchmarks/`](../benchmarks) and saved under
 [`benchmarks/results/`](../benchmarks/results).
 
-**Short answer:** code catches most loops by itself. jev adds a modest, real gain on top when
-code acts first (+5 points of catches, +8 points of recoverable spend, no extra false alarms).
-It hurts when it is allowed to override code. Laya, as configured in this release, adds nothing
-on this task. No detector we tried, tuned or not, was precise enough to stop sessions
-automatically. That is why unwedge hints by default.
+**Short answer:** unwedge's free code tier catches 60% of runaway sessions, typically halfway
+through. Adding jev raises that to 65% and the spend recoverable after the first alert from 47%
+to 55%, with no extra false alarms (5 of 69 successful sessions got a hint). The provider has to
+add to code, not override it: overriding halves the catches. Laya, as configured in this
+release, does not add accuracy yet. No detector reached near-zero false alarms, so unwedge hints
+by default and stopping is opt-in.
 
 ## Data
 

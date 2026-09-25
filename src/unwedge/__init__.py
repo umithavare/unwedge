@@ -15,7 +15,7 @@ from unwedge.policy import Action, Decision, Thresholds, Verdict
 from unwedge.providers import make_provider
 from unwedge.turns import Session, ToolClass, Turn
 
-__version__ = "0.1.0"
+__version__ = "0.1.1"
 
 __all__ = [
     "Action", "Decision", "Guard", "GuardConfig", "GuardOutcome", "Session", "Thresholds", "ToolClass", "Turn",

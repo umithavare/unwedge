@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "unwedge"
-version = "0.1.0"
+version = "0.1.1"
 description = "A circuit breaker for AI coding agents: catches doom loops in Claude Code, Codex CLI and custom agent loops, with optional judgments from TypeSafe jev or a local Laya model."
 readme = "README.md"
 license = "Apache-2.0"

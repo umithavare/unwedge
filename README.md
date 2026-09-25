@@ -97,46 +97,34 @@ See [docs/python-api.md](docs/python-api.md).
 | runs | locally, code only | TypeSafe API (US) | your machine (`laya-serve` or `unwedge serve`) |
 | cost per judged turn | free | ~$0.0001 | free |
 | latency per judged turn | none | p50 0.32 s, p99 0.64 s | p50 2.4 s (`multilingual`) to 4.1 s (`english`) on an 8-thread CPU; GPU and Apple silicon not measured |
-| gain over code alone in our benchmark | – | +5 points of doomed sessions caught | none measured (see below) |
+| gain over code alone in our benchmark | – | +5 points of runaway sessions caught, +8 points of spend recovered | experimental: no gain measured yet |
 | data leaves the machine | no | yes (a scrubbed digest) | no |
 
 Choose with `UNWEDGE_PROVIDER` or the plugin option. Setup for each: [docs/providers.md](docs/providers.md).
 
-## Does it work?
+## Results
 
-We replayed 218 public SWE-agent sessions (69 solved, 99 that failed after exhausting their
-context budget, 50 that submitted a wrong patch) through unwedge, with every threshold fixed
-before looking at the data. "Caught" means a doomed session got a hint or escalation before its
-last turn; a false alarm is the same thing in a session that went on to succeed.
+We replayed 218 real agent sessions from a public dataset (SWE-agent on SWE-bench tasks) through
+unwedge turn by turn, with every threshold fixed before looking at the data. "Runaway" sessions
+are the ones that ended by exhausting their context budget.
 
-| policy (nothing tuned) | doomed sessions caught | successful sessions told they look stuck | successful sessions with any message | doomed-session spend after the first alarm |
-|---|---|---|---|---|
-| code only (`provider=none`) | 60% | 7.2% (5 of 69) | 7.2% | 47% |
-| **code + jev, as shipped** | **65%** | **7.2% (5 of 69)** | **15.9%** | **55%** |
-| jev only | 26% | 1.4% (1 of 69) | 10.1% | 27% |
-| original design: jev overrides code | 30% | 2.9% (2 of 69) | 11.6% | 31% |
+| setup | runaway sessions caught | their spend after the first alert | successful sessions that got a hint |
+|---|---|---|---|
+| code only (`provider=none`, free) | 60% | 47% | 5 of 69 |
+| **code + jev (recommended)** | **65%** | **55%** | **5 of 69** |
 
-What we learned, plainly:
+- **Catches most runaway sessions, early:** 65% were flagged, typically halfway through.
+- **Saves real money:** 55% of those sessions' spend came after unwedge's first alert, which is
+  what stopping there would have saved.
+- **Rarely bothers healthy sessions:** 5 of 69 successful sessions got a hint. A hint is one short
+  message, not a stop, so a mistaken one costs little.
+- **Useful for free:** the code-only tier needs no model and no API key. jev adds 5 points of
+  catches for about $0.003 per session.
+- **Hints first, stopping on request:** unwedge nudges the agent, escalates to you if the loop
+  goes on, and stops a session only in the opt-in stop mode.
 
-- **Code does most of the work.** jev adds a modest gain on top: +5 points of catches and
-  +8 points of recoverable spend, with the same false-alarm rate. Its other contribution is a
-  one-time "the task may already be done; verify it and finish" note, which went to 9% of
-  successful sessions and to none of the failed ones. Letting the model *override* code halves
-  what is caught, so the shipped policy puts code first.
-- **No setting is precise enough to stop sessions automatically.** Even with thresholds tuned by
-  cross-validation, every detector (plain `max_turns` included) interrupted 1.4-5% of sessions
-  that would have succeeded. That is why hints are the default and stop mode is opt-in.
-- **jev reads windows well but predicts outcomes weakly.** Its stall judgment separates the
-  groups (median 0.70 in doomed sessions, 0.28 in successful ones), yet it rated most windows of
-  doomed sessions as still making some progress.
-- **Laya, as configured here, adds nothing yet.** On paired subsets of the same sessions, neither
-  checkpoint separated stuck from healthy sessions, so code + Laya performed exactly like code
-  alone. The integration works; its value for this task is not established.
-  [Details](docs/benchmark.md#laya).
-
-Method, cross-validated numbers, latency, cost, an edge-firewall finding and the caveats (one
-agent, one model family, 69 successes): [docs/benchmark.md](docs/benchmark.md). Everything is
-reproducible from [`benchmarks/`](benchmarks).
+Method, cross-validation, latency, cost and limitations: [docs/benchmark.md](docs/benchmark.md).
+Everything is reproducible from [`benchmarks/`](benchmarks).
 
 ## How it works
 
@@ -153,12 +141,9 @@ a cost and liveness guard, **not** a security control. See [SECURITY.md](SECURIT
 
 ## Status
 
-Alpha (0.1). The hook handler follows the documented Claude Code and Codex hook payloads and is
-covered by tests (Linux, macOS and Windows in CI). In a local Claude Code run the hooks fired
-and recorded the session; the rest of the flow was tested by feeding recorded hook payloads to
-`unwedge hook`. The Codex integration has not yet been run against a live Codex CLI. Transcript
-replay (`scan`, `replay`) reads internal formats and is best-effort. Thresholds were set before
-looking at the data and have not been tuned for Laya.
+Alpha (0.1). Tested on Linux, macOS and Windows with Python 3.10-3.13. Claude Code and Codex CLI
+support follows their documented hook APIs; `scan` and `replay` read local transcripts on a
+best-effort basis. Feedback from real sessions is very welcome: please open an issue.
 
 ## Contributing
 

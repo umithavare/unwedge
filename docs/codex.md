@@ -3,6 +3,9 @@
 Codex CLI 0.124 and later has lifecycle hooks in the same format as Claude Code, and unwedge
 uses the same `unwedge hook` command for both; it recognizes a Codex payload by itself.
 
+Codex support is built on Codex's documented hook payloads and covered by tests. If your Codex
+version behaves differently, please open an issue with the hook payload (secrets removed).
+
 ## 1. Install the CLI
 
 ```bash

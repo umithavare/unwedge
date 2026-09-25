@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.1 — 2026-09-25
+
+- README: the results section now leads with what unwedge achieves; the full method and
+  limitations stay in `docs/benchmark.md`.
+- Install instructions point to PyPI (`uv tool install unwedge`).
+
 ## 0.1.0 — 2026-09-23
 
 First public version.
