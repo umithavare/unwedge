@@ -108,7 +108,7 @@ We replayed 218 real agent sessions from a public dataset (SWE-agent on SWE-benc
 unwedge turn by turn, with every threshold fixed before looking at the data. "Runaway" sessions
 are the ones that ended by exhausting their context budget.
 
-| setup | runaway sessions caught | their spend after the first alert | successful sessions that got a hint |
+| setup | runaway sessions caught | their spend after the first alert | successful sessions told they look stuck |
 |---|---|---|---|
 | code only (`provider=none`, free) | 60% | 47% | 5 of 69 |
 | **code + jev (recommended)** | **65%** | **55%** | **5 of 69** |
@@ -116,8 +116,10 @@ are the ones that ended by exhausting their context budget.
 - **Catches most runaway sessions, early:** 65% were flagged, typically halfway through.
 - **Saves real money:** 55% of those sessions' spend came after unwedge's first alert, which is
   what stopping there would have saved.
-- **Rarely bothers healthy sessions:** 5 of 69 successful sessions got a hint. A hint is one short
-  message, not a stop, so a mistaken one costs little.
+- **Rarely bothers healthy sessions:** 5 of 69 successful sessions were told they look stuck. A
+  hint is one short message, not a stop, so a mistaken one costs little. With jev, successful
+  sessions near their end can also get a one-time "the task may already be done; verify it"
+  note (6 of 69); no failed session got one.
 - **Useful for free:** the code-only tier needs no model and no API key. jev adds 5 points of
   catches for about $0.003 per session.
 - **Hints first, stopping on request:** unwedge nudges the agent, escalates to you if the loop

@@ -115,7 +115,7 @@ Herkese açık bir veri setinden 218 gerçek ajan oturumunu (SWE-bench görevler
 adım unwedge'den geçirdik; tüm eşikler veriye bakmadan önce sabitlendi. "Kontrolden çıkan"
 oturumlar, bağlam bütçesini tüketerek biten oturumlar.
 
-| kurulum | yakalanan kontrolden çıkan oturum | ilk uyarıdan sonraki harcama payı | ipucu alan başarılı oturum |
+| kurulum | yakalanan kontrolden çıkan oturum | ilk uyarıdan sonraki harcama payı | "takıldın" denen başarılı oturum |
 |---|---|---|---|
 | yalnızca kod (`provider=none`, ücretsiz) | %60 | %47 | 69'da 5 |
 | **kod + jev (önerilen)** | **%65** | **%55** | **69'da 5** |
@@ -124,8 +124,10 @@ oturumlar, bağlam bütçesini tüketerek biten oturumlar.
   yarısında işaretlendi.
 - **Gerçek para kurtarıyor:** bu oturumların harcamasının %55'i unwedge'in ilk uyarısından sonra
   yapılmıştı; orada durdurmak bu kadarını kurtarırdı.
-- **Sağlıklı oturumları nadiren rahatsız ediyor:** 69 başarılı oturumun 5'i bir ipucu aldı.
-  İpucu kısa bir mesajdır, oturumu durdurmaz; yanlış giden bir ipucunun maliyeti küçüktür.
+- **Sağlıklı oturumları nadiren rahatsız ediyor:** 69 başarılı oturumun 5'ine "takıldın" denildi.
+  İpucu kısa bir mesajdır, oturumu durdurmaz; yanlış giden bir ipucunun maliyeti küçüktür. jev
+  açıkken, sonuna yaklaşan başarılı oturumlar tek seferlik "iş bitmiş olabilir, doğrula" notu da
+  alabiliyor (69'da 6); başarısız oturumların hiçbirine gitmedi.
 - **Ücretsiz de işe yarıyor:** kod katmanı model ya da API anahtarı istemez. jev, oturum başına
   yaklaşık 0,003 $ ile yakalamaya 5 puan ekler.
 - **Önce ipucu, durdurma isteğe bağlı:** unwedge ajanı dürter, döngü sürerse size haber verir;
