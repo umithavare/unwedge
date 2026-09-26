@@ -19,9 +19,9 @@ Ajanlar tanıdık bir şekilde çuvallar: 9. adımda takılır, 60. adımda hâl
 harcandıktan sonra devreye girer. unwedge davranışa bakar:
 
 ```text
-T6  edit 199:205 (+19 lines) -> edit REJECTED, not applied: F821 undefined name   S=0.97 P0=0.13
-T7  edit 199:205 (+19 lines) -> edit REJECTED, not applied: F821 undefined name   S=0.97 P0=0.18
-T8  edit 199:205 (+19 lines) -> edit REJECTED, not applied: F821 undefined name   S=0.97 P0=0.19  <<< ipucu
+T6  edit 199:205 (+19 lines) -> edit REJECTED, not applied: F821 undefined name   S=0.98 P0=0.15
+T7  edit 199:205 (+19 lines) -> edit REJECTED, not applied: F821 undefined name   S=0.97 P0=0.16
+T8  edit 199:205 (+19 lines) -> edit REJECTED, not applied: F821 undefined name   S=0.97 P0=0.20  <<< ipucu
     [UNWEDGE] You have run this command 4 times with the same result. Change something before
     running it again, or step back and re-read the error.
 T11 ...                                                                                            <<< ipucu
@@ -54,6 +54,7 @@ reddedildi; oturum harcamasının %94'ü unwedge'in ilk ipucundan sonra yapıld�
 ```bash
 uv tool install unwedge   # ya da: pipx install unwedge / pip install unwedge
 unwedge scan        # son Claude Code ve Codex oturumlarınızı tarar, döngüleri işaretler; ücretsiz, yerel
+unwedge export      # kendi oturumlarınızı etiketleyip unwedge'i onlarda ölçün (docs/dataset.md)
 unwedge doctor      # ayarları ve sağlayıcıyı kontrol eder
 ```
 
@@ -97,7 +98,7 @@ Ayrıntılar: [docs/python-api.md](docs/python-api.md).
 | nerede çalışır | yerelde, yalnızca kod | TypeSafe API (ABD) | kendi makinenizde (`laya-serve` veya `unwedge serve`) |
 | değerlendirilen adım başına maliyet | ücretsiz | ~0,0001 $ | ücretsiz |
 | değerlendirilen adım başına gecikme | yok | p50 0,32 sn, p99 0,64 sn | CPU'da (8 iş parçacığı) p50 2,4 sn (`multilingual`) ile 4,1 sn (`english`) arası; GPU ve Apple silicon ölçülmedi |
-| benchmark'ta yalnızca koda göre kazanç | – | kontrolden çıkan oturum yakalamada +5 puan, kurtarılan harcamada +8 puan | deneysel: henüz kazanç ölçülmedi |
+| benchmark'ta yalnızca koda göre kazanç | – | yakalamada +1 puan, ayrıca tek seferlik "iş bitmiş olabilir" notu | deneysel: henüz kazanç ölçülmedi |
 | veri makineden çıkar mı | hayır | evet (gizli bilgileri temizlenmiş bir özet) | hayır |
 
 `UNWEDGE_PROVIDER` ortam değişkeniyle veya eklenti ayarından seçilir:
@@ -112,29 +113,45 @@ Her birinin kurulumu: [docs/providers.md](docs/providers.md).
 ## Sonuçlar
 
 Herkese açık bir veri setinden 218 gerçek ajan oturumunu (SWE-bench görevlerinde SWE-agent) adım
-adım unwedge'den geçirdik; tüm eşikler veriye bakmadan önce sabitlendi. "Kontrolden çıkan"
-oturumlar, bağlam bütçesini tüketerek biten oturumlar.
+adım unwedge'den geçirdik. "Kontrolden çıkan" oturumlar, bağlam bütçesini tüketerek biten
+oturumlar.
 
 | kurulum | yakalanan kontrolden çıkan oturum | ilk uyarıdan sonraki harcama payı | "takıldın" denen başarılı oturum |
 |---|---|---|---|
-| yalnızca kod (`provider=none`, ücretsiz) | %60 | %47 | 69'da 5 |
-| **kod + jev (önerilen)** | **%65** | **%55** | **69'da 5** |
+| yalnızca kod (`provider=none`, ücretsiz) | %78 | %63 | 69'da 5 |
+| **kod + jev** | **%79** | **%64** | **69'da 5** |
 
-- **Kontrolden çıkan oturumların çoğunu erkenden yakalıyor:** %65'i, genellikle oturumun
+- **Kontrolden çıkan oturumların çoğunu erkenden yakalıyor:** %79'u, genellikle oturumun
   yarısında işaretlendi.
-- **Gerçek para kurtarıyor:** bu oturumların harcamasının %55'i unwedge'in ilk uyarısından sonra
+- **Gerçek para kurtarıyor:** bu oturumların harcamasının %64'ü unwedge'in ilk uyarısından sonra
   yapılmıştı; orada durdurmak bu kadarını kurtarırdı.
 - **Sağlıklı oturumları nadiren rahatsız ediyor:** 69 başarılı oturumun 5'ine "takıldın" denildi.
   İpucu kısa bir mesajdır, oturumu durdurmaz; yanlış giden bir ipucunun maliyeti küçüktür. jev
   açıkken, sonuna yaklaşan başarılı oturumlar tek seferlik "iş bitmiş olabilir, doğrula" notu da
   alabiliyor (69'da 6); başarısız oturumların hiçbirine gitmedi.
-- **Ücretsiz de işe yarıyor:** kod katmanı model ya da API anahtarı istemez. jev, oturum başına
-  yaklaşık 0,003 $ ile yakalamaya 5 puan ekler.
+- **Varsayılan olarak ücretsiz:** kod katmanı model ya da API anahtarı istemez ve işin neredeyse
+  tamamını yapar.
 - **Önce ipucu, durdurma isteğe bağlı:** unwedge ajanı dürter, döngü sürerse size haber verir;
   oturumu yalnızca isteğe bağlı stop modunda durdurur.
 
-Yöntem, çapraz doğrulama, gecikme, maliyet ve sınırlamalar: [docs/benchmark.md](docs/benchmark.md).
-Hepsi [`benchmarks/`](benchmarks) klasöründen yeniden üretilebilir.
+### Tek veri setinin ötesinde
+
+Kod katmanı, farklı ajan ve modelleri kapsayan dört herkese açık veri setinden 3.885 oturumda da
+denendi:
+
+| ajan / modeller | yakalanan kontrolden çıkan oturum | "takıldın" denen başarılı oturum |
+|---|---|---|
+| SWE-agent, Llama 70B | %78 | %7,2 |
+| SWE-agent, Claude 3.7 / 3.5 Sonnet ve GPT-4o | %47 | %2,5 |
+| OpenHands | %21 | %16,7 |
+| mini-swe-agent, GPT-5-mini / GPT-5.2 | (veride döngü yok) | normal biten 600 oturumun hiçbiri |
+
+Geliştiricinin kendi son 60 Claude Code ve Codex oturumunda yalnızca birini işaretledi: aynı
+hatayı beş kez tekrarlayan gerçek bir döngü.
+
+Yöntem, tüm tablolar ve sınırlamalar: [docs/benchmark.md](docs/benchmark.md). Hepsi
+[`benchmarks/`](benchmarks) klasöründen yeniden üretilebilir. unwedge'i kendi oturumlarınızda
+ölçmek için oturumlarınızı `unwedge export` ile etiketleyin: [docs/dataset.md](docs/dataset.md).
 
 ## Modlar
 
@@ -157,7 +174,7 @@ maliyet ve canlılık korumasıdır, **güvenlik kontrolü değildir**. Bkz. [SE
 
 ## Durum
 
-Alfa (0.1). Linux, macOS ve Windows'ta, Python 3.10-3.13 ile test edildi. Claude Code ve Codex CLI
+Alfa (0.2). Linux, macOS ve Windows'ta, Python 3.10-3.13 ile test edildi. Claude Code ve Codex CLI
 desteği bu araçların belgelenmiş hook API'lerini izler; `scan` ve `replay` yerel oturum kayıtlarını
 elden geldiğince okur. Gerçek oturumlardan geri bildirim çok değerli: lütfen bir issue açın.
 

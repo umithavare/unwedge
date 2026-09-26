@@ -1,44 +1,44 @@
 session samkohn__larpix-control-68  group=burn  resolved=False  turns=36  exit=exit_context
 
 T1 search_dir "def get_nondefault_registers" -> Found 1 matches for "def get_n | not gated                          |      1 ms | continue
-T2 open larpix/larpix.py 1 -> shows /larpix-control/larpix/larpix.py lines 1-1 | not gated                          |      2 ms | continue
-T3 search_file "def get_nondefault_registers" larpix/larpix.py -> Found 1 matc | not gated                          |      1 ms | continue
-T4 goto 199 -> shows /larpix-control/larpix/larpix.py lines 184-283 of 1357    | S=0.23 P0=0.03 T=0.02 G=0.09       |    339 ms | continue
+T2 open larpix/larpix.py 1 -> shows /larpix-control/larpix/larpix.py lines 1-1 | not gated                          |      1 ms | continue
+T3 search_file "def get_nondefault_registers" larpix/larpix.py -> Found 1 matc | not gated                          |      0 ms | continue
+T4 goto 199 -> shows /larpix-control/larpix/larpix.py lines 184-283 of 1357    | S=0.32 P0=0.02 T=0.02 G=0.08       |    327 ms | continue
 T5 edit 199:205 (+19 lines) -> edit REJECTED, not applied: F821 undefined name | not gated                          |      1 ms | continue
-T6 edit 199:205 (+19 lines) -> edit REJECTED, not applied: F821 undefined name | S=0.97 P0=0.13 T=0.02 G=0.19       |    494 ms | continue
-T7 edit 199:205 (+19 lines) -> edit REJECTED, not applied: F821 undefined name | S=0.97 P0=0.18 T=0.02 G=0.18       |    341 ms | continue
-T8 edit 199:205 (+19 lines) -> edit REJECTED, not applied: F821 undefined name | S=0.97 P0=0.19 T=0.02 G=0.19       |    772 ms | hint  <<<
+T6 edit 199:205 (+19 lines) -> edit REJECTED, not applied: F821 undefined name | S=0.98 P0=0.15 T=0.02 G=0.20       |    270 ms | continue
+T7 edit 199:205 (+19 lines) -> edit REJECTED, not applied: F821 undefined name | S=0.97 P0=0.16 T=0.02 G=0.18       |    282 ms | continue
+T8 edit 199:205 (+19 lines) -> edit REJECTED, not applied: F821 undefined name | S=0.97 P0=0.20 T=0.02 G=0.18       |    519 ms | hint  <<<
                                                                                 hint [H01_same_command_same_failure]: You have run this command 4 times with the same result. Change something before running it again, or step back and re-read the error.
-T9 edit 199:205 (+19 lines) -> edit REJECTED, not applied: F821 undefined name | S=0.97 P0=0.23 T=0.01 G=0.19       |    341 ms | continue
-T10 edit 203:215 (+8 lines) -> edit REJECTED, not applied: F821 undefined name | S=0.84 P0=0.12 T=0.02 G=0.21       |    271 ms | continue
-T11 edit 202:205 (+10 lines) -> edit REJECTED, not applied: F821 undefined nam | S=0.83 P0=0.09 T=0.02 G=0.13       |    612 ms | hint  <<<
+T9 edit 199:205 (+19 lines) -> edit REJECTED, not applied: F821 undefined name | S=0.97 P0=0.20 T=0.02 G=0.19       |    291 ms | continue
+T10 edit 203:215 (+8 lines) -> edit REJECTED, not applied: F821 undefined name | S=0.84 P0=0.11 T=0.02 G=0.18       |    265 ms | continue
+T11 edit 202:205 (+10 lines) -> edit REJECTED, not applied: F821 undefined nam | S=0.83 P0=0.09 T=0.02 G=0.14       |    541 ms | hint  <<<
                                                                                 hint [H03_error_text_ignored]: Read the last error message literally and address exactly what it names before trying anything else.
-T12 edit 203:204 (+5 lines) -> edit REJECTED, not applied: F821 undefined name | S=0.90 P0=0.14 T=0.02 G=0.16       |    265 ms | continue
-T13 edit 203:204 (+8 lines) -> edit REJECTED, not applied: F821 undefined name | S=0.92 P0=0.16 T=0.02 G=0.15       |    443 ms | continue
-T14 edit 203:204 (+5 lines) -> edit REJECTED, not applied: F821 undefined name | S=0.92 P0=0.23 T=0.02 G=0.17       |    313 ms | escalate  <<<
-T15 edit 202:205 (+10 lines) -> edit REJECTED, not applied: F821 undefined nam | S=0.92 P0=0.50 T=0.02 G=0.18       |    277 ms | continue
-T16 edit 203:204 (+8 lines) -> edit REJECTED, not applied: F821 undefined name | S=0.94 P0=0.86 T=0.02 G=0.15       |    315 ms | continue
-T17 edit 203:204 (+5 lines) -> edit REJECTED, not applied: F821 undefined name | S=0.92 P0=0.66 T=0.02 G=0.13       |    274 ms | continue
-T18 edit 202:205 (+10 lines) -> edit REJECTED, not applied: F821 undefined nam | S=0.92 P0=0.76 T=0.02 G=0.13       |    282 ms | continue
-T19 edit 203:204 (+5 lines) -> edit REJECTED, not applied: F821 undefined name | fail-open: ProviderTimeout: no answer within 0.50s |    509 ms | continue
-T20 edit 203:204 (+8 lines) -> edit REJECTED, not applied: F821 undefined name | S=0.95 P0=0.67 T=0.02 G=0.13       |    292 ms | continue
-T21 edit 203:204 (+5 lines) -> edit REJECTED, not applied: F821 undefined name | S=0.93 P0=0.60 T=0.02 G=0.12       |    360 ms | continue
-T22 edit 202:205 (+10 lines) -> edit REJECTED, not applied: F821 undefined nam | S=0.95 P0=0.88 T=0.02 G=0.15       |    302 ms | escalate  <<<
-T23 edit 203:204 (+5 lines) -> edit REJECTED, not applied: F821 undefined name | S=0.95 P0=0.89 T=0.02 G=0.14       |    431 ms | continue
-T24 edit 202:205 (+10 lines) -> edit REJECTED, not applied: F821 undefined nam | S=0.95 P0=0.85 T=0.02 G=0.15       |    264 ms | continue
-T25 edit 203:204 (+5 lines) -> edit REJECTED, not applied: F821 undefined name | S=0.96 P0=0.93 T=0.02 G=0.12       |    326 ms | continue
-T26 edit 202:205 (+10 lines) -> edit REJECTED, not applied: F821 undefined nam | S=0.95 P0=0.88 T=0.02 G=0.14       |    317 ms | continue
-T27 edit 203:204 (+5 lines) -> edit REJECTED, not applied: F821 undefined name | S=0.95 P0=0.89 T=0.02 G=0.14       |    497 ms | continue
-T28 edit 202:205 (+10 lines) -> edit REJECTED, not applied: F821 undefined nam | S=0.95 P0=0.90 T=0.02 G=0.15       |    278 ms | continue
-T29 edit 203:204 (+5 lines) -> edit REJECTED, not applied: F821 undefined name | S=0.95 P0=0.87 T=0.02 G=0.14       |    291 ms | continue
-T30 edit 202:205 (+10 lines) -> edit REJECTED, not applied: F821 undefined nam | S=0.95 P0=0.85 T=0.02 G=0.15       |    312 ms | escalate  <<<
-T31 edit 203:204 (+5 lines) -> edit REJECTED, not applied: F821 undefined name | S=0.96 P0=0.89 T=0.02 G=0.14       |    261 ms | continue
-T32 edit 202:205 (+10 lines) -> edit REJECTED, not applied: F821 undefined nam | S=0.96 P0=0.87 T=0.02 G=0.15       |    274 ms | continue
-T33 edit 203:204 (+5 lines) -> edit REJECTED, not applied: F821 undefined name | S=0.96 P0=0.91 T=0.02 G=0.14       |    284 ms | continue
-T34 edit 202:205 (+10 lines) -> edit REJECTED, not applied: F821 undefined nam | S=0.95 P0=0.91 T=0.02 G=0.13       |    278 ms | continue
-T35 edit 203:204 (+5 lines) -> edit REJECTED, not applied: F821 undefined name | S=0.96 P0=0.88 T=0.02 G=0.16       |    302 ms | continue
-T36 edit 202:205 (+10 lines) -> edit applied                                   | S=0.64 P0=0.08 T=0.08 G=0.20       |    489 ms | continue
+T12 edit 203:204 (+5 lines) -> edit REJECTED, not applied: F821 undefined name | S=0.88 P0=0.14 T=0.02 G=0.16       |    264 ms | continue
+T13 edit 203:204 (+8 lines) -> edit REJECTED, not applied: F821 undefined name | S=0.93 P0=0.15 T=0.02 G=0.16       |    257 ms | continue
+T14 edit 203:204 (+5 lines) -> edit REJECTED, not applied: F821 undefined name | S=0.92 P0=0.21 T=0.02 G=0.16       |    315 ms | escalate  <<<
+T15 edit 202:205 (+10 lines) -> edit REJECTED, not applied: F821 undefined nam | S=0.92 P0=0.50 T=0.02 G=0.18       |    275 ms | continue
+T16 edit 203:204 (+8 lines) -> edit REJECTED, not applied: F821 undefined name | S=0.93 P0=0.86 T=0.02 G=0.14       |    330 ms | continue
+T17 edit 203:204 (+5 lines) -> edit REJECTED, not applied: F821 undefined name | S=0.93 P0=0.64 T=0.02 G=0.14       |    330 ms | continue
+T18 edit 202:205 (+10 lines) -> edit REJECTED, not applied: F821 undefined nam | S=0.94 P0=0.74 T=0.02 G=0.12       |    253 ms | continue
+T19 edit 203:204 (+5 lines) -> edit REJECTED, not applied: F821 undefined name | S=0.94 P0=0.79 T=0.02 G=0.13       |    261 ms | continue
+T20 edit 203:204 (+8 lines) -> edit REJECTED, not applied: F821 undefined name | S=0.93 P0=0.68 T=0.02 G=0.13       |    249 ms | continue
+T21 edit 203:204 (+5 lines) -> edit REJECTED, not applied: F821 undefined name | S=0.92 P0=0.61 T=0.02 G=0.12       |    265 ms | continue
+T22 edit 202:205 (+10 lines) -> edit REJECTED, not applied: F821 undefined nam | S=0.95 P0=0.86 T=0.02 G=0.13       |    279 ms | escalate  <<<
+T23 edit 203:204 (+5 lines) -> edit REJECTED, not applied: F821 undefined name | S=0.96 P0=0.87 T=0.02 G=0.14       |    282 ms | continue
+T24 edit 202:205 (+10 lines) -> edit REJECTED, not applied: F821 undefined nam | S=0.95 P0=0.86 T=0.02 G=0.15       |    255 ms | continue
+T25 edit 203:204 (+5 lines) -> edit REJECTED, not applied: F821 undefined name | S=0.95 P0=0.91 T=0.02 G=0.12       |    253 ms | continue
+T26 edit 202:205 (+10 lines) -> edit REJECTED, not applied: F821 undefined nam | S=0.96 P0=0.86 T=0.02 G=0.13       |    283 ms | continue
+T27 edit 203:204 (+5 lines) -> edit REJECTED, not applied: F821 undefined name | S=0.96 P0=0.89 T=0.02 G=0.14       |    259 ms | continue
+T28 edit 202:205 (+10 lines) -> edit REJECTED, not applied: F821 undefined nam | S=0.96 P0=0.87 T=0.02 G=0.12       |    280 ms | continue
+T29 edit 203:204 (+5 lines) -> edit REJECTED, not applied: F821 undefined name | S=0.96 P0=0.87 T=0.02 G=0.12       |    301 ms | continue
+T30 edit 202:205 (+10 lines) -> edit REJECTED, not applied: F821 undefined nam | S=0.96 P0=0.82 T=0.02 G=0.15       |    288 ms | escalate  <<<
+T31 edit 203:204 (+5 lines) -> edit REJECTED, not applied: F821 undefined name | S=0.96 P0=0.91 T=0.02 G=0.16       |    264 ms | continue
+T32 edit 202:205 (+10 lines) -> edit REJECTED, not applied: F821 undefined nam | S=0.96 P0=0.90 T=0.02 G=0.15       |    256 ms | continue
+T33 edit 203:204 (+5 lines) -> edit REJECTED, not applied: F821 undefined name | S=0.96 P0=0.89 T=0.02 G=0.15       |    257 ms | continue
+T34 edit 202:205 (+10 lines) -> edit REJECTED, not applied: F821 undefined nam | S=0.96 P0=0.87 T=0.02 G=0.13       |    282 ms | continue
+T35 edit 203:204 (+5 lines) -> edit REJECTED, not applied: F821 undefined name | S=0.96 P0=0.89 T=0.02 G=0.13       |    287 ms | continue
+T36 edit 202:205 (+10 lines) -> edit applied                                   | S=0.64 P0=0.09 T=0.09 G=0.20       |    256 ms | continue
 
 first intervention: turn 8 of 36; agent spend after it: 94% of the session
-guard wall-clock on gated turns: p50 313 ms, max 772 ms over 32 calls; provider spend $0.00281
+guard wall-clock on gated turns: p50 279 ms, max 541 ms over 32 calls; provider spend $0.00290
 ledger: benchmarks/results/replay_samkohn__larpix-control-68.jsonl

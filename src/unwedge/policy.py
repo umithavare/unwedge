@@ -42,6 +42,12 @@ class Thresholds:
     ambiguous_before_cascade: int = 3
     cooldown_turns: int = 3  # no new code-tier intervention within this many turns of the last one
     reescalate_turns: int = 8  # after an escalation, repeat it at most this often while the loop goes on
+    # code tier (chosen on four datasets, see docs/benchmark.md); counts are EARLIER occurrences,
+    # so 3 repeats means the fourth time
+    code_repeats: int = 3  # same command, nothing changed / same command with the same result
+    code_errors: int = 4  # same error signature
+    code_cycles: int = 3  # a 2-4 step sequence repeating back to back
+    stall_turns: int = 35  # no applied change for this long while results or errors repeat
 
 
 @dataclass(frozen=True)
@@ -85,13 +91,22 @@ class Decision:
 
 
 def code_stall_evidence(code: CodeSignals) -> bool:
-    return code.repeat_without_change >= 2 or code.result_repeats >= 2 or code.error_repeats >= 2
+    return (code.repeat_without_change >= 2 or code.result_repeats >= 2 or code.error_repeats >= 2
+            or code.pair_repeats >= 2 or code.cycle_repeats >= 2)
 
 
-def code_only_decision(code: CodeSignals) -> Decision:
-    """The code tier's stateless test: only blatant loops act."""
-    if code.repeat_without_change >= 3 or code.error_repeats >= 4:
-        return Decision(Action.HINT, ("code: blatant repeat with nothing changed",))
+def code_only_decision(code: CodeSignals, t: Thresholds = Thresholds()) -> Decision:
+    """The code tier's stateless test: only clear loops act. A long session without edits is
+    not a loop on its own (reviews and research sessions look like that), so the stall rule also
+    needs repeating results or errors."""
+    if code.repeat_without_change >= t.code_repeats or code.pair_repeats >= t.code_repeats:
+        return Decision(Action.HINT, ("code: the same action keeps giving the same result",))
+    if code.error_repeats >= t.code_errors:
+        return Decision(Action.HINT, ("code: the same error keeps coming back",))
+    if code.cycle_repeats >= t.code_cycles:
+        return Decision(Action.HINT, ("code: the same sequence of steps keeps repeating",))
+    if code.turns_since_change >= t.stall_turns and (code.result_repeats >= 1 or code.error_repeats >= 1):
+        return Decision(Action.HINT, (f"code: {code.turns_since_change} turns without an applied change",))
     return Decision(Action.CONTINUE, ("code-only tier",))
 
 
@@ -125,14 +140,14 @@ def step(
 
 
 def _code_tier(state: PolicyState, code: CodeSignals, t: Thresholds) -> tuple[PolicyState, Decision]:
-    decision = code_only_decision(code)
+    decision = code_only_decision(code, t)
     if decision.action is Action.CONTINUE:
         return state, decision
     if state.last_intervention_turn and code.turn - state.last_intervention_turn < t.cooldown_turns:
         return state, Decision(Action.CONTINUE, ("cooling down after an intervention",))
     if state.hints_given < t.max_hints:
         return replace(state, hints_given=state.hints_given + 1, last_intervention_turn=code.turn), decision
-    return _escalate(state, code.turn, t, ("code: blatant repeat continues after hints",))
+    return _escalate(state, code.turn, t, ("code: the loop continues after hints",))
 
 
 def _escalate(state: PolicyState, turn: int, t: Thresholds,

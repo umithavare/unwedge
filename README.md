@@ -21,9 +21,9 @@ token caps and timeouts protect the budget, not the behaviour, so they fire afte
 spent. unwedge watches the behaviour:
 
 ```text
-T6  edit 199:205 (+19 lines) -> edit REJECTED, not applied: F821 undefined name   S=0.97 P0=0.13
-T7  edit 199:205 (+19 lines) -> edit REJECTED, not applied: F821 undefined name   S=0.97 P0=0.18
-T8  edit 199:205 (+19 lines) -> edit REJECTED, not applied: F821 undefined name   S=0.97 P0=0.19  <<< hint
+T6  edit 199:205 (+19 lines) -> edit REJECTED, not applied: F821 undefined name   S=0.98 P0=0.15
+T7  edit 199:205 (+19 lines) -> edit REJECTED, not applied: F821 undefined name   S=0.97 P0=0.16
+T8  edit 199:205 (+19 lines) -> edit REJECTED, not applied: F821 undefined name   S=0.97 P0=0.20  <<< hint
     [UNWEDGE] You have run this command 4 times with the same result. Change something before
     running it again, or step back and re-read the error.
 T11 ...                                                                                            <<< hint
@@ -54,6 +54,7 @@ the session's spend came after unwedge's first hint.
 ```bash
 uv tool install unwedge   # or: pipx install unwedge / pip install unwedge
 unwedge scan        # replay your recent Claude Code and Codex sessions and flag loops; free, local
+unwedge export      # label your own sessions to measure unwedge on them (docs/dataset.md)
 unwedge doctor      # check settings and the provider
 ```
 
@@ -97,7 +98,7 @@ See [docs/python-api.md](docs/python-api.md).
 | runs | locally, code only | TypeSafe API (US) | your machine (`laya-serve` or `unwedge serve`) |
 | cost per judged turn | free | ~$0.0001 | free |
 | latency per judged turn | none | p50 0.32 s, p99 0.64 s | p50 2.4 s (`multilingual`) to 4.1 s (`english`) on an 8-thread CPU; GPU and Apple silicon not measured |
-| gain over code alone in our benchmark | – | +5 points of runaway sessions caught, +8 points of spend recovered | experimental: no gain measured yet |
+| gain over code alone in our benchmark | – | +1 point of runaway sessions caught, plus a one-time "the task may be done" note | experimental: no gain measured yet |
 | data leaves the machine | no | yes (a scrubbed digest) | no |
 
 Choose with `UNWEDGE_PROVIDER` or the plugin option. Setup for each: [docs/providers.md](docs/providers.md).
@@ -105,28 +106,44 @@ Choose with `UNWEDGE_PROVIDER` or the plugin option. Setup for each: [docs/provi
 ## Results
 
 We replayed 218 real agent sessions from a public dataset (SWE-agent on SWE-bench tasks) through
-unwedge turn by turn, with every threshold fixed before looking at the data. "Runaway" sessions
-are the ones that ended by exhausting their context budget.
+unwedge turn by turn. "Runaway" sessions are the ones that ended by exhausting their context
+budget.
 
 | setup | runaway sessions caught | their spend after the first alert | successful sessions told they look stuck |
 |---|---|---|---|
-| code only (`provider=none`, free) | 60% | 47% | 5 of 69 |
-| **code + jev (recommended)** | **65%** | **55%** | **5 of 69** |
+| code only (`provider=none`, free) | 78% | 63% | 5 of 69 |
+| **code + jev** | **79%** | **64%** | **5 of 69** |
 
-- **Catches most runaway sessions, early:** 65% were flagged, typically halfway through.
-- **Saves real money:** 55% of those sessions' spend came after unwedge's first alert, which is
+- **Catches most runaway sessions, early:** 79% were flagged, typically halfway through.
+- **Saves real money:** 64% of those sessions' spend came after unwedge's first alert, which is
   what stopping there would have saved.
 - **Rarely bothers healthy sessions:** 5 of 69 successful sessions were told they look stuck. A
   hint is one short message, not a stop, so a mistaken one costs little. With jev, successful
   sessions near their end can also get a one-time "the task may already be done; verify it"
   note (6 of 69); no failed session got one.
-- **Useful for free:** the code-only tier needs no model and no API key. jev adds 5 points of
-  catches for about $0.003 per session.
+- **Free by default:** the code-only tier needs no model and no API key and does almost all of
+  the work.
 - **Hints first, stopping on request:** unwedge nudges the agent, escalates to you if the loop
   goes on, and stops a session only in the opt-in stop mode.
 
-Method, cross-validation, latency, cost and limitations: [docs/benchmark.md](docs/benchmark.md).
-Everything is reproducible from [`benchmarks/`](benchmarks).
+### Beyond one dataset
+
+The code tier was also checked on 3,885 sessions from four public datasets, covering different
+agents and models:
+
+| agent / models | runaway sessions caught | successful sessions told they look stuck |
+|---|---|---|
+| SWE-agent, Llama 70B | 78% | 7.2% |
+| SWE-agent, Claude 3.7 / 3.5 Sonnet and GPT-4o | 47% | 2.5% |
+| OpenHands | 21% | 16.7% |
+| mini-swe-agent, GPT-5-mini / GPT-5.2 | (no loops in the data) | 0 of 600 normal sessions |
+
+On 60 of the author's own recent Claude Code and Codex sessions it flagged one: a genuine loop
+that repeated the same error five times.
+
+Method, all tables and limitations: [docs/benchmark.md](docs/benchmark.md). Everything is
+reproducible from [`benchmarks/`](benchmarks). To measure unwedge on your own sessions, label
+them with `unwedge export`: [docs/dataset.md](docs/dataset.md).
 
 ## How it works
 
@@ -143,7 +160,7 @@ a cost and liveness guard, **not** a security control. See [SECURITY.md](SECURIT
 
 ## Status
 
-Alpha (0.1). Tested on Linux, macOS and Windows with Python 3.10-3.13. Claude Code and Codex CLI
+Alpha (0.2). Tested on Linux, macOS and Windows with Python 3.10-3.13. Claude Code and Codex CLI
 support follows their documented hook APIs; `scan` and `replay` read local transcripts on a
 best-effort basis. Feedback from real sessions is very welcome: please open an issue.
 

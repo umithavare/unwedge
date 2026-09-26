@@ -81,7 +81,7 @@ class GuardOutcome:
 
 def code_hint(code: CodeSignals) -> str:
     """Deterministic hint choice for when no provider can pick one."""
-    if code.repeat_without_change >= 1:
+    if code.repeat_without_change >= 1 or code.pair_repeats >= 1 or code.cycle_repeats >= 2:
         return "H01_same_command_same_failure"
     if code.read_only_streak >= 4:
         return "H02_rereading_same_content"

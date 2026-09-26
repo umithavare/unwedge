@@ -1,7 +1,7 @@
 {
   "name": "unwedge",
   "displayName": "unwedge",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Circuit breaker for doom loops: spots repeated failing commands, rereading and stalled progress, logs them and can add a short hint to Claude's context. Needs the unwedge CLI on PATH (uv tool install unwedge).",
   "author": {
     "name": "umithavare",

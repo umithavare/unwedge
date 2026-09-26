@@ -145,7 +145,8 @@ def read_transcript(path: str | Path) -> tuple[str, list[dict]]:
                     if isinstance(item, Mapping) and item.get("type") == "tool_use":
                         uses[item.get("id")] = (str(item.get("name") or ""), item.get("input") or {})
             elif entry.get("type") == "user":
-                goal = goal or _prompt_text(content)
+                if not entry.get("isMeta"):  # skill text and other injected context is not the task
+                    goal = goal or _prompt_text(content)
                 for item in content if isinstance(content, list) else ():
                     is_result = isinstance(item, Mapping) and item.get("type") == "tool_result"
                     if is_result and item.get("tool_use_id") in uses:

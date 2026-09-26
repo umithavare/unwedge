@@ -74,6 +74,7 @@ not been tested end to end yet; the `hooks.json` setup above is the supported on
 unwedge report
 unwedge scan                                     # includes ~/.codex/sessions rollouts
 unwedge replay ~/.codex/sessions/2026/09/23/rollout-....jsonl
+unwedge export                                   # label your sessions (docs/dataset.md)
 ```
 
 Rollouts older than 7 days are compressed (`.jsonl.zst`) by Codex; `scan` and `replay` read

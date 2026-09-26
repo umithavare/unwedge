@@ -30,8 +30,11 @@ same "stop and ask the user" message that hint mode sends.
 
 ## The policy, in short
 
-- **Code tier** (always on): the same action repeated three times with nothing changed in
-  between, or the same error four times, earns a hint. A cooldown of three turns separates
+- **Code tier** (always on): a hint when the same action runs a fourth time with nothing changed
+  in between or with the same result, the same error comes back a fifth time, a 2-4 step
+  sequence repeats three times, or 35 turns pass without an applied change while results or
+  errors repeat (a long session without edits is not a loop on its own: reviews and research
+  look like that). A cooldown of three turns separates
   interventions; after two hints it escalates (asks the agent to stop and ask the user), and
   repeats the escalation at most every eight turns while the loop goes on.
 - **Provider** (when configured): it is asked only on turns code finds suspicious, plus every

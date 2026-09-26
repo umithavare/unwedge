@@ -194,6 +194,8 @@ def _code_signals_at(flat: Flat, row: int) -> CodeSignals:
         turns_since_change=int(values["turns_since_change"]),
         read_only_streak=int(values["read_only_streak"]),
         invalid_streak=int(values["invalid_streak"]),
+        pair_repeats=int(values["pair_repeats"]),
+        cycle_repeats=int(values["cycle_repeats"]),
     )
 
 

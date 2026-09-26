@@ -19,6 +19,7 @@ INF = np.inf
 CODE_FEATURES = (
     "exact_repeats", "repeat_without_change", "result_repeats", "error_repeats", "read_only_streak",
     "turns_since_change", "consecutive_errors", "invalid_streak", "action_similarity", "result_similarity",
+    "pair_repeats", "cycle_repeats",
 )
 JEV_FEATURES = ("s_repeat", "s_unchanged", "s_error", "stall", "p0", "progress", "terminal", "drift", "gate")
 
@@ -29,6 +30,7 @@ class Flat:
 
     session_ids: tuple[str, ...]
     groups: np.ndarray  # per session
+    sources: np.ndarray  # per session: the dataset it came from
     n_turns: np.ndarray  # per session
     total_cost: np.ndarray  # per session
     starts: np.ndarray  # per session, offset into the flat arrays
@@ -71,6 +73,7 @@ def build_flat(sessions: Sequence[Session], battery: Iterable[dict]) -> Flat:
     return Flat(
         session_ids=tuple(s.session_id for s in sessions),
         groups=np.array([s.group for s in sessions]),
+        sources=np.array([s.source or "nebius" for s in sessions]),
         n_turns=np.array(n_turns),
         total_cost=np.array(totals),
         starts=np.array(starts),

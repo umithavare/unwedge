@@ -148,3 +148,35 @@ def test_a_successful_command_between_repeats_counts_as_a_change():
 def test_back_to_back_identical_successful_commands_still_accumulate():
     turns = [make_turn(i, "python reproduce.py", "same output") for i in range(1, 6)]
     assert compute_signals(turns)[4].repeat_without_change == 4
+
+
+def test_pair_repeats_count_the_same_result_even_across_edits():
+    # edit, test, edit, test ... with the same failure every time: the edits change nothing that matters
+    turns = []
+    for n in range(4):
+        turns.append(make_turn(2 * n + 1, f"sed -i 's/a{n}/b{n}/' pay.py", "ok"))
+        turns.append(make_turn(2 * n + 2, "pytest -x", "FAILED test_refund - AssertionError"))
+    last = compute_signals(turns)[-1]
+    assert last.repeat_without_change == 0  # every rerun follows an applied edit
+    assert last.pair_repeats == 3
+
+
+def test_cycle_repeats_detect_a_repeating_sequence():
+    loop = ["cat a.py", "python a.py"] * 3
+    turns = [make_turn(i + 1, command, f"output of {command}") for i, command in enumerate(loop)]
+    assert compute_signals(turns)[-1].cycle_repeats == 3
+    varied = [make_turn(i + 1, f"cat f{i}.py", f"content {i}") for i in range(6)]
+    assert compute_signals(varied)[-1].cycle_repeats == 1
+
+
+def test_screenshots_and_ui_tools_are_not_counted_as_the_same_result():
+    # a real false alarm: taking screenshots while scrolling a page, where every screenshot's text is empty
+    from unwedge.policy import Action, code_only_decision
+
+    turns = []
+    for n in range(8):
+        turns.append(make_turn(2 * n + 1, 'mcp__preview__screenshot {"serverId": "s1"}', ""))
+        turns.append(make_turn(2 * n + 2, 'mcp__preview__eval {"expression": "scrollBy(0, 800)"}', '"scrolled"'))
+    for signals in compute_signals(turns):
+        assert signals.pair_repeats == 0 and signals.cycle_repeats == 1
+        assert code_only_decision(signals).action is Action.CONTINUE

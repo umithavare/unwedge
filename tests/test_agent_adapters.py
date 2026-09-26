@@ -130,3 +130,15 @@ def test_claude_code_failed_edit_arrives_as_a_failure_event():
     assert failed.tool_class is ToolClass.EDIT and failed.is_error and not failed.changes_state
     applied = claude_code.turn_from_hook(cc("Edit", edit, {"filePath": "a.py", "oldString": "x", "newString": "y"}), 4)
     assert applied.changes_state and not applied.is_error and applied.observation == "(edit applied) a.py"
+
+
+def test_claude_code_transcript_goal_skips_injected_skill_text(tmp_path):
+    entries = [
+        {"type": "user", "isMeta": True, "message": {"content": [
+            {"type": "text", "text": "Base directory for this skill: /home/me/.claude/plugins/x"}]}},
+        {"type": "user", "message": {"content": "Fix the flaky login test"}},
+    ]
+    path = tmp_path / "t.jsonl"
+    path.write_text("\n".join(json.dumps(e) for e in entries), encoding="utf-8")
+    goal, _ = claude_code.read_transcript(path)
+    assert goal == "Fix the flaky login test"

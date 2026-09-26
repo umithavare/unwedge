@@ -68,6 +68,25 @@ def cmd_scan(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_export(args: argparse.Namespace) -> int:
+    from unwedge.export import export_sessions
+    from unwedge.replay import recent_transcripts
+
+    paths = args.paths or recent_transcripts(limit=args.limit)
+    if not paths:
+        print("No Claude Code transcripts or Codex rollouts found.")
+        return 0
+    summary = export_sessions(paths, args.out)
+    print(f"Wrote {summary.written} sessions to {args.out} ({summary.flagged} with an unwedge alarm, "
+          f"{summary.skipped} skipped).")
+    print('Label each line: set "group" to "success", "burn" (it got stuck) or "wrong", and optionally '
+          '"stuck_turn" to the first turn of the loop; "unwedge_first_alarm" shows where unwedge fired.')
+    print(f"Then: python benchmarks/multisource.py --extra {args.out}")
+    print("The file contains your commands and tool output (secrets are scrubbed by pattern): review it before "
+          "sharing.")
+    return 0
+
+
 def cmd_replay(args: argparse.Namespace) -> int:
     from unwedge.replay import format_timeline, replay_file
 
@@ -155,6 +174,12 @@ def build_parser() -> argparse.ArgumentParser:
     scan.add_argument("--provider", choices=PROVIDER_NAMES, default=None, help="default: none (free, local)")
     scan.add_argument("--model", default=None)
     scan.set_defaults(func=cmd_scan)
+
+    export = sub.add_parser("export", help="write your recent sessions as labellable data (unwedge session format)")
+    export.add_argument("paths", nargs="*", help="transcripts or rollouts; default: the most recent ones")
+    export.add_argument("--limit", type=int, default=50)
+    export.add_argument("--out", default="unwedge-sessions.jsonl")
+    export.set_defaults(func=cmd_export)
 
     replay = sub.add_parser("replay", help="show turn by turn what the guard would have done in one session")
     replay.add_argument("path")

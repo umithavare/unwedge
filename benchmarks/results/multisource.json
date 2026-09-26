@@ -1,0 +1,766 @@
+{
+  "sessions": {
+    "nebius": {
+      "success": 69,
+      "burn": 99,
+      "wrong": 50,
+      "submitted": 0,
+      "limit": 0
+    },
+    "swe-smith": {
+      "success": 800,
+      "burn": 211,
+      "wrong": 400,
+      "submitted": 0,
+      "limit": 0
+    },
+    "swe-gym": {
+      "success": 192,
+      "burn": 600,
+      "wrong": 300,
+      "submitted": 0,
+      "limit": 0
+    },
+    "jetbrains": {
+      "success": 0,
+      "burn": 0,
+      "wrong": 0,
+      "submitted": 600,
+      "limit": 564
+    }
+  },
+  "shipped": {
+    "nebius": {
+      "catch": 0.7777777777777778,
+      "false_alarm": 0.07246376811594203,
+      "savings": 0.6296083181359552,
+      "position": 0.5208333333333334,
+      "submitted_alarm": null,
+      "wrong_alarm": 0.08,
+      "n_burn": 99,
+      "n_success": 69
+    },
+    "swe-smith": {
+      "catch": 0.46919431279620855,
+      "false_alarm": 0.025,
+      "savings": 0.32391349482290444,
+      "position": 0.5666666666666667,
+      "submitted_alarm": null,
+      "wrong_alarm": 0.0775,
+      "n_burn": 211,
+      "n_success": 800
+    },
+    "swe-gym": {
+      "catch": 0.21333333333333335,
+      "false_alarm": 0.16666666666666666,
+      "savings": 0.38626235214085564,
+      "position": 0.5366666666666666,
+      "submitted_alarm": null,
+      "wrong_alarm": 0.20333333333333334,
+      "n_burn": 600,
+      "n_success": 192
+    },
+    "jetbrains": {
+      "catch": NaN,
+      "false_alarm": NaN,
+      "savings": 0.0,
+      "position": NaN,
+      "submitted_alarm": 0.0,
+      "wrong_alarm": null,
+      "n_burn": 0,
+      "n_success": 0
+    },
+    "all": {
+      "catch": 0.33406593406593404,
+      "false_alarm": 0.05372290292177191,
+      "savings": 0.3740811904651629,
+      "position": 0.5378571428571428,
+      "submitted_alarm": 0.0,
+      "wrong_alarm": 0.128,
+      "n_burn": 910,
+      "n_success": 1061
+    }
+  },
+  "tuned": {
+    "0.01": {
+      "max_turns": {
+        "nebius": {
+          "catch": 0.0,
+          "false_alarm": 0.0,
+          "savings": 0.0,
+          "position": NaN,
+          "submitted_alarm": null,
+          "wrong_alarm": 0.0,
+          "n_burn": 99,
+          "n_success": 69
+        },
+        "swe-smith": {
+          "catch": 0.7962085308056872,
+          "false_alarm": 0.04875,
+          "savings": 0.47743389954159093,
+          "position": 0.6666666666666666,
+          "submitted_alarm": null,
+          "wrong_alarm": 0.1175,
+          "n_burn": 211,
+          "n_success": 800
+        },
+        "swe-gym": {
+          "catch": 0.0,
+          "false_alarm": 0.0,
+          "savings": 0.0,
+          "position": NaN,
+          "submitted_alarm": null,
+          "wrong_alarm": 0.0,
+          "n_burn": 600,
+          "n_success": 192
+        },
+        "jetbrains": {
+          "catch": NaN,
+          "false_alarm": NaN,
+          "savings": 0.0,
+          "position": NaN,
+          "submitted_alarm": 0.0,
+          "wrong_alarm": null,
+          "n_burn": 0,
+          "n_success": 0
+        },
+        "all": {
+          "catch": 0.18461538461538463,
+          "false_alarm": 0.036757775683317624,
+          "savings": 0.32961981943958896,
+          "position": 0.6666666666666666,
+          "submitted_alarm": 0.0,
+          "wrong_alarm": 0.06266666666666666,
+          "n_burn": 910,
+          "n_success": 1061
+        }
+      },
+      "code": {
+        "nebius": {
+          "catch": 0.3838383838383838,
+          "false_alarm": 0.028985507246376812,
+          "savings": 0.35523905161290603,
+          "position": 0.5064102564102564,
+          "submitted_alarm": null,
+          "wrong_alarm": 0.0,
+          "n_burn": 99,
+          "n_success": 69
+        },
+        "swe-smith": {
+          "catch": 0.8104265402843602,
+          "false_alarm": 0.05,
+          "savings": 0.5025503195926446,
+          "position": 0.6666666666666666,
+          "submitted_alarm": null,
+          "wrong_alarm": 0.12,
+          "n_burn": 211,
+          "n_success": 800
+        },
+        "swe-gym": {
+          "catch": 0.07833333333333334,
+          "false_alarm": 0.03125,
+          "savings": 0.06305215598516987,
+          "position": 0.75,
+          "submitted_alarm": null,
+          "wrong_alarm": 0.03666666666666667,
+          "n_burn": 600,
+          "n_success": 192
+        },
+        "jetbrains": {
+          "catch": NaN,
+          "false_alarm": NaN,
+          "savings": 0.0,
+          "position": NaN,
+          "submitted_alarm": 0.0016666666666666668,
+          "wrong_alarm": null,
+          "n_burn": 0,
+          "n_success": 0
+        },
+        "all": {
+          "catch": 0.2813186813186813,
+          "false_alarm": 0.04524033930254477,
+          "savings": 0.4035402704797281,
+          "position": 0.6666666666666666,
+          "submitted_alarm": 0.0016666666666666668,
+          "wrong_alarm": 0.07866666666666666,
+          "n_burn": 910,
+          "n_success": 1061
+        }
+      },
+      "logistic_code": {
+        "nebius": {
+          "catch": 0.37373737373737376,
+          "false_alarm": 0.014492753623188406,
+          "savings": 0.30340461087199516,
+          "position": 0.5128205128205128,
+          "submitted_alarm": null,
+          "wrong_alarm": 0.06,
+          "n_burn": 99,
+          "n_success": 69
+        },
+        "swe-smith": {
+          "catch": 0.06635071090047394,
+          "false_alarm": 0.00125,
+          "savings": 0.035777863032035014,
+          "position": 0.4500620347394541,
+          "submitted_alarm": null,
+          "wrong_alarm": 0.0,
+          "n_burn": 211,
+          "n_success": 800
+        },
+        "swe-gym": {
+          "catch": 0.06166666666666667,
+          "false_alarm": 0.03125,
+          "savings": 0.05838137023272611,
+          "position": 0.7777777777777778,
+          "submitted_alarm": null,
+          "wrong_alarm": 0.013333333333333334,
+          "n_burn": 600,
+          "n_success": 192
+        },
+        "jetbrains": {
+          "catch": NaN,
+          "false_alarm": NaN,
+          "savings": 0.0,
+          "position": NaN,
+          "submitted_alarm": 0.0,
+          "wrong_alarm": null,
+          "n_burn": 0,
+          "n_success": 0
+        },
+        "all": {
+          "catch": 0.0967032967032967,
+          "false_alarm": 0.007540056550424128,
+          "savings": 0.0738530875219008,
+          "position": 0.6737588652482269,
+          "submitted_alarm": 0.0,
+          "wrong_alarm": 0.009333333333333334,
+          "n_burn": 910,
+          "n_success": 1061
+        }
+      }
+    },
+    "0.02": {
+      "max_turns": {
+        "nebius": {
+          "catch": 0.0,
+          "false_alarm": 0.0,
+          "savings": 0.0,
+          "position": NaN,
+          "submitted_alarm": null,
+          "wrong_alarm": 0.0,
+          "n_burn": 99,
+          "n_success": 69
+        },
+        "swe-smith": {
+          "catch": 0.7962085308056872,
+          "false_alarm": 0.04875,
+          "savings": 0.47743389954159093,
+          "position": 0.6666666666666666,
+          "submitted_alarm": null,
+          "wrong_alarm": 0.1175,
+          "n_burn": 211,
+          "n_success": 800
+        },
+        "swe-gym": {
+          "catch": 0.0,
+          "false_alarm": 0.0,
+          "savings": 0.0,
+          "position": NaN,
+          "submitted_alarm": null,
+          "wrong_alarm": 0.0,
+          "n_burn": 600,
+          "n_success": 192
+        },
+        "jetbrains": {
+          "catch": NaN,
+          "false_alarm": NaN,
+          "savings": 0.0,
+          "position": NaN,
+          "submitted_alarm": 0.0,
+          "wrong_alarm": null,
+          "n_burn": 0,
+          "n_success": 0
+        },
+        "all": {
+          "catch": 0.18461538461538463,
+          "false_alarm": 0.036757775683317624,
+          "savings": 0.32961981943958896,
+          "position": 0.6666666666666666,
+          "submitted_alarm": 0.0,
+          "wrong_alarm": 0.06266666666666666,
+          "n_burn": 910,
+          "n_success": 1061
+        }
+      },
+      "code": {
+        "nebius": {
+          "catch": 0.3434343434343434,
+          "false_alarm": 0.028985507246376812,
+          "savings": 0.3001508994552864,
+          "position": 0.5119047619047619,
+          "submitted_alarm": null,
+          "wrong_alarm": 0.04,
+          "n_burn": 99,
+          "n_success": 69
+        },
+        "swe-smith": {
+          "catch": 0.8104265402843602,
+          "false_alarm": 0.05,
+          "savings": 0.5025503195926446,
+          "position": 0.6666666666666666,
+          "submitted_alarm": null,
+          "wrong_alarm": 0.12,
+          "n_burn": 211,
+          "n_success": 800
+        },
+        "swe-gym": {
+          "catch": 0.18,
+          "false_alarm": 0.13020833333333334,
+          "savings": 0.27732713046608515,
+          "position": 0.5733333333333333,
+          "submitted_alarm": null,
+          "wrong_alarm": 0.16333333333333333,
+          "n_burn": 600,
+          "n_success": 192
+        },
+        "jetbrains": {
+          "catch": NaN,
+          "false_alarm": NaN,
+          "savings": 0.0,
+          "position": NaN,
+          "submitted_alarm": 0.0,
+          "wrong_alarm": null,
+          "n_burn": 0,
+          "n_success": 0
+        },
+        "all": {
+          "catch": 0.34395604395604396,
+          "false_alarm": 0.06314797360980208,
+          "savings": 0.4357157815225445,
+          "position": 0.6666666666666666,
+          "submitted_alarm": 0.0,
+          "wrong_alarm": 0.132,
+          "n_burn": 910,
+          "n_success": 1061
+        }
+      },
+      "logistic_code": {
+        "nebius": {
+          "catch": 0.41414141414141414,
+          "false_alarm": 0.043478260869565216,
+          "savings": 0.2825409331329229,
+          "position": 0.5365853658536586,
+          "submitted_alarm": null,
+          "wrong_alarm": 0.04,
+          "n_burn": 99,
+          "n_success": 69
+        },
+        "swe-smith": {
+          "catch": 0.07582938388625593,
+          "false_alarm": 0.0025,
+          "savings": 0.039991827558206905,
+          "position": 0.42374896608767576,
+          "submitted_alarm": null,
+          "wrong_alarm": 0.0,
+          "n_burn": 211,
+          "n_success": 800
+        },
+        "swe-gym": {
+          "catch": 0.12333333333333334,
+          "false_alarm": 0.052083333333333336,
+          "savings": 0.12331396479420266,
+          "position": 0.7583333333333333,
+          "submitted_alarm": null,
+          "wrong_alarm": 0.03,
+          "n_burn": 600,
+          "n_success": 192
+        },
+        "jetbrains": {
+          "catch": NaN,
+          "false_alarm": NaN,
+          "savings": 0.0,
+          "position": NaN,
+          "submitted_alarm": 0.0,
+          "wrong_alarm": null,
+          "n_burn": 0,
+          "n_success": 0
+        },
+        "all": {
+          "catch": 0.14395604395604394,
+          "false_alarm": 0.01413760603204524,
+          "savings": 0.08598376850453442,
+          "position": 0.7,
+          "submitted_alarm": 0.0,
+          "wrong_alarm": 0.014666666666666666,
+          "n_burn": 910,
+          "n_success": 1061
+        }
+      }
+    },
+    "0.05": {
+      "max_turns": {
+        "nebius": {
+          "catch": 0.2828282828282828,
+          "false_alarm": 0.014492753623188406,
+          "savings": 0.3152870998452814,
+          "position": 0.6558641975308641,
+          "submitted_alarm": null,
+          "wrong_alarm": 0.0,
+          "n_burn": 99,
+          "n_success": 69
+        },
+        "swe-smith": {
+          "catch": 0.8388625592417062,
+          "false_alarm": 0.09125,
+          "savings": 0.6373909907670899,
+          "position": 0.5333333333333333,
+          "submitted_alarm": null,
+          "wrong_alarm": 0.2075,
+          "n_burn": 211,
+          "n_success": 800
+        },
+        "swe-gym": {
+          "catch": 0.0,
+          "false_alarm": 0.0,
+          "savings": 0.0,
+          "position": NaN,
+          "submitted_alarm": null,
+          "wrong_alarm": 0.0,
+          "n_burn": 600,
+          "n_success": 192
+        },
+        "jetbrains": {
+          "catch": NaN,
+          "false_alarm": NaN,
+          "savings": 0.0,
+          "position": NaN,
+          "submitted_alarm": 0.0,
+          "wrong_alarm": null,
+          "n_burn": 0,
+          "n_success": 0
+        },
+        "all": {
+          "catch": 0.22527472527472528,
+          "false_alarm": 0.06974552309142319,
+          "savings": 0.4800429760808622,
+          "position": 0.5333333333333333,
+          "submitted_alarm": 0.0,
+          "wrong_alarm": 0.11066666666666666,
+          "n_burn": 910,
+          "n_success": 1061
+        }
+      },
+      "code": {
+        "nebius": {
+          "catch": 0.5858585858585859,
+          "false_alarm": 0.043478260869565216,
+          "savings": 0.5210614842835889,
+          "position": 0.6098467945857504,
+          "submitted_alarm": null,
+          "wrong_alarm": 0.0,
+          "n_burn": 99,
+          "n_success": 69
+        },
+        "swe-smith": {
+          "catch": 0.8151658767772512,
+          "false_alarm": 0.07,
+          "savings": 0.5470049463839673,
+          "position": 0.6666666666666666,
+          "submitted_alarm": null,
+          "wrong_alarm": 0.1475,
+          "n_burn": 211,
+          "n_success": 800
+        },
+        "swe-gym": {
+          "catch": 0.245,
+          "false_alarm": 0.15104166666666666,
+          "savings": 0.34474336919438087,
+          "position": 0.6666666666666666,
+          "submitted_alarm": null,
+          "wrong_alarm": 0.18,
+          "n_burn": 600,
+          "n_success": 192
+        },
+        "jetbrains": {
+          "catch": NaN,
+          "false_alarm": NaN,
+          "savings": 0.0,
+          "position": NaN,
+          "submitted_alarm": 0.005,
+          "wrong_alarm": null,
+          "n_burn": 0,
+          "n_success": 0
+        },
+        "all": {
+          "catch": 0.4142857142857143,
+          "false_alarm": 0.08294062205466542,
+          "savings": 0.5067475732613657,
+          "position": 0.6666666666666666,
+          "submitted_alarm": 0.005,
+          "wrong_alarm": 0.15066666666666667,
+          "n_burn": 910,
+          "n_success": 1061
+        }
+      },
+      "logistic_code": {
+        "nebius": {
+          "catch": 0.7171717171717171,
+          "false_alarm": 0.15942028985507245,
+          "savings": 0.5743924812339415,
+          "position": 0.38095238095238093,
+          "submitted_alarm": null,
+          "wrong_alarm": 0.16,
+          "n_burn": 99,
+          "n_success": 69
+        },
+        "swe-smith": {
+          "catch": 0.08530805687203792,
+          "false_alarm": 0.0025,
+          "savings": 0.050717050777417526,
+          "position": 0.4391025641025641,
+          "submitted_alarm": null,
+          "wrong_alarm": 0.0,
+          "n_burn": 211,
+          "n_success": 800
+        },
+        "swe-gym": {
+          "catch": 0.22,
+          "false_alarm": 0.109375,
+          "savings": 0.2768174237315024,
+          "position": 0.7333333333333333,
+          "submitted_alarm": null,
+          "wrong_alarm": 0.08666666666666667,
+          "n_burn": 600,
+          "n_success": 192
+        },
+        "jetbrains": {
+          "catch": NaN,
+          "false_alarm": NaN,
+          "savings": 0.0,
+          "position": NaN,
+          "submitted_alarm": 0.0,
+          "wrong_alarm": null,
+          "n_burn": 0,
+          "n_success": 0
+        },
+        "all": {
+          "catch": 0.24285714285714285,
+          "false_alarm": 0.03204524033930255,
+          "savings": 0.15846046748219572,
+          "position": 0.6,
+          "submitted_alarm": 0.0,
+          "wrong_alarm": 0.04533333333333334,
+          "n_burn": 910,
+          "n_success": 1061
+        }
+      }
+    }
+  },
+  "chosen": {
+    "0.01": {
+      "max_turns": {
+        "nebius": {
+          "max_turns": null
+        },
+        "swe-smith": {
+          "max_turns": 50
+        },
+        "swe-gym": {
+          "max_turns": null
+        },
+        "jetbrains": {
+          "max_turns": null
+        }
+      },
+      "code": {
+        "nebius": {
+          "repeat_without_change": null,
+          "result_repeats": 5,
+          "error_repeats": null,
+          "read_only_streak": null,
+          "turns_since_change": null,
+          "max_turns": null
+        },
+        "swe-smith": {
+          "repeat_without_change": null,
+          "result_repeats": null,
+          "error_repeats": null,
+          "read_only_streak": null,
+          "turns_since_change": 30,
+          "max_turns": 50
+        },
+        "swe-gym": {
+          "repeat_without_change": null,
+          "result_repeats": 5,
+          "error_repeats": null,
+          "read_only_streak": null,
+          "turns_since_change": 30,
+          "max_turns": null
+        },
+        "jetbrains": {
+          "repeat_without_change": null,
+          "result_repeats": null,
+          "error_repeats": null,
+          "read_only_streak": null,
+          "turns_since_change": 30,
+          "max_turns": null
+        }
+      },
+      "logistic_code": {
+        "nebius": {
+          "tau": 0.9991321434099505,
+          "consecutive": 1
+        },
+        "swe-smith": {
+          "tau": 0.9976295306019072,
+          "consecutive": 1
+        },
+        "swe-gym": {
+          "tau": 0.8796821109244987,
+          "consecutive": 2
+        },
+        "jetbrains": {
+          "tau": 0.9991187067226286,
+          "consecutive": 1
+        }
+      }
+    },
+    "0.02": {
+      "max_turns": {
+        "nebius": {
+          "max_turns": null
+        },
+        "swe-smith": {
+          "max_turns": 50
+        },
+        "swe-gym": {
+          "max_turns": null
+        },
+        "jetbrains": {
+          "max_turns": 60
+        }
+      },
+      "code": {
+        "nebius": {
+          "repeat_without_change": null,
+          "result_repeats": null,
+          "error_repeats": null,
+          "read_only_streak": null,
+          "turns_since_change": 20,
+          "max_turns": null
+        },
+        "swe-smith": {
+          "repeat_without_change": null,
+          "result_repeats": null,
+          "error_repeats": null,
+          "read_only_streak": null,
+          "turns_since_change": 30,
+          "max_turns": 50
+        },
+        "swe-gym": {
+          "repeat_without_change": 3,
+          "result_repeats": 5,
+          "error_repeats": 5,
+          "read_only_streak": null,
+          "turns_since_change": 30,
+          "max_turns": null
+        },
+        "jetbrains": {
+          "repeat_without_change": null,
+          "result_repeats": null,
+          "error_repeats": null,
+          "read_only_streak": null,
+          "turns_since_change": null,
+          "max_turns": 60
+        }
+      },
+      "logistic_code": {
+        "nebius": {
+          "tau": 0.9930663799683809,
+          "consecutive": 2
+        },
+        "swe-smith": {
+          "tau": 0.9944928994680935,
+          "consecutive": 1
+        },
+        "swe-gym": {
+          "tau": 0.9001482819019238,
+          "consecutive": 1
+        },
+        "jetbrains": {
+          "tau": 0.997970392261916,
+          "consecutive": 1
+        }
+      }
+    },
+    "0.05": {
+      "max_turns": {
+        "nebius": {
+          "max_turns": 50
+        },
+        "swe-smith": {
+          "max_turns": 40
+        },
+        "swe-gym": {
+          "max_turns": 50
+        },
+        "jetbrains": {
+          "max_turns": 50
+        }
+      },
+      "code": {
+        "nebius": {
+          "repeat_without_change": null,
+          "result_repeats": 5,
+          "error_repeats": null,
+          "read_only_streak": null,
+          "turns_since_change": 30,
+          "max_turns": 50
+        },
+        "swe-smith": {
+          "repeat_without_change": null,
+          "result_repeats": null,
+          "error_repeats": null,
+          "read_only_streak": 15,
+          "turns_since_change": 30,
+          "max_turns": 50
+        },
+        "swe-gym": {
+          "repeat_without_change": 3,
+          "result_repeats": 5,
+          "error_repeats": 5,
+          "read_only_streak": null,
+          "turns_since_change": 20,
+          "max_turns": 60
+        },
+        "jetbrains": {
+          "repeat_without_change": null,
+          "result_repeats": 5,
+          "error_repeats": null,
+          "read_only_streak": null,
+          "turns_since_change": 30,
+          "max_turns": 50
+        }
+      },
+      "logistic_code": {
+        "nebius": {
+          "tau": 0.7847502874992662,
+          "consecutive": 2
+        },
+        "swe-smith": {
+          "tau": 0.9894853920032768,
+          "consecutive": 1
+        },
+        "swe-gym": {
+          "tau": 0.8017786715983445,
+          "consecutive": 1
+        },
+        "jetbrains": {
+          "tau": 0.7807614855285662,
+          "consecutive": 2
+        }
+      }
+    }
+  }
+}

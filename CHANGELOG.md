@@ -1,5 +1,24 @@
 # Changelog
 
+## 0.2.0 — 2026-09-26
+
+- Code tier: three new loop signals, checked on 3,885 sessions from four public datasets. The
+  same command with the same result counts as a repeat even when edits ran in between; a 2-4
+  step sequence repeating three times counts as a loop; 35 turns without an applied change count
+  when results or errors repeat. Screenshots, empty results and UI tool calls never count as
+  "the same result". On the original benchmark, catches rose from 60% to 78% (code only) and
+  from 65% to 79% (code + jev) with the same false alarms; on Claude and GPT-4o sessions from
+  32% to 47%.
+- Code-tier thresholds live in `Thresholds` (`code_repeats`, `code_errors`, `code_cycles`,
+  `stall_turns`).
+- `unwedge export` writes your recent Claude Code and Codex sessions in the new session format
+  (`unwedge.dataset`) so you can label them and measure unwedge on your own work.
+- `unwedge.adapters.messages` converts chat-message traces: OpenAI tool calls, SWE-agent function
+  markup and mini-swe-agent bash blocks.
+- Benchmark: a four-dataset corpus (SWE-agent with Llama 70B; SWE-agent with Claude 3.7/3.5
+  Sonnet and GPT-4o; OpenHands; mini-swe-agent with GPT-5) with leave-one-source-out
+  evaluation (`benchmarks/multisource.py`) and `docs/dataset.md`.
+
 ## 0.1.1 — 2026-09-25
 
 - README: the results section now leads with what unwedge achieves; the full method and

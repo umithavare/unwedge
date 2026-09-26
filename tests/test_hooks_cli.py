@@ -170,3 +170,17 @@ def test_cli_reports_invalid_settings(monkeypatch, capsys):
     with pytest.raises(SystemExit) as exit_info:
         cli.main(["doctor"])
     assert exit_info.value.code == 2 and "unwedge serve" in capsys.readouterr().err
+
+
+def test_export_writes_labellable_sessions(tmp_path, capsys):
+    from unwedge.dataset import read_sessions
+
+    transcript = tmp_path / "session.jsonl"
+    write_transcript(transcript)
+    out = tmp_path / "mine.jsonl"
+    assert cli.main(["export", str(transcript), "--out", str(out)]) == 0
+    assert "Wrote 1 sessions" in capsys.readouterr().out
+    record = json.loads(out.read_text(encoding="utf-8"))
+    assert record["group"] is None and record["unwedge_first_alarm"] == 4 and record["source"] == "local-claude-code"
+    (session,) = read_sessions(out)
+    assert session.group == "unlabelled" and len(session.turns) == 5

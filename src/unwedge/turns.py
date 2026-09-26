@@ -34,11 +34,13 @@ class Session:
     """A finished session with its outcome, used for offline evaluation and replay."""
 
     session_id: str
-    group: str  # sampling group: success / burn / wrong
+    group: str  # sampling group: success / burn / wrong (or submitted / unlabelled)
     resolved: bool  # the task was solved (ground truth from the benchmark)
     exit_status: str
     goal: str
     turns: tuple[Turn, ...]
+    source: str = ""  # where the session comes from: a dataset, a harness, "local"
+    model: str = ""  # the agent's model, when known
 
     @property
     def total_cost(self) -> float:

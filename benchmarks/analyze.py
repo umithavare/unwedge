@@ -77,7 +77,7 @@ def logistic_features(flat: Flat, with_jev: bool) -> np.ndarray:
     code = flat.code
     columns = [np.log1p(code[name]) for name in (
         "repeat_without_change", "result_repeats", "error_repeats", "read_only_streak",
-        "turns_since_change", "consecutive_errors", "invalid_streak")]
+        "turns_since_change", "consecutive_errors", "invalid_streak", "pair_repeats", "cycle_repeats")]
     columns += [code["action_similarity"], code["result_similarity"], np.log(flat.turn)]
     if with_jev:
         jev = flat.jev

@@ -80,6 +80,7 @@ as the "stop and ask the user" message.
 unwedge report            # sessions the hooks saw, first alarm, interventions
 unwedge scan              # replay your last 20 Claude Code / Codex sessions (free, local)
 unwedge replay ~/.claude/projects/<project>/<session>.jsonl   # turn by turn
+unwedge export            # label your sessions and measure unwedge on them (docs/dataset.md)
 ```
 
 `unwedge scan` and `unwedge replay` read session transcripts. The transcript format is

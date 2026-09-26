@@ -131,3 +131,13 @@ def test_code_tier_escalation_is_rate_limited_too():
     first = actions.index(Action.ESCALATE)
     assert Action.ESCALATE not in actions[first + 1:first + Thresholds().reescalate_turns]
     assert actions[first + Thresholds().reescalate_turns] is Action.ESCALATE
+
+
+def test_new_code_triggers():
+    assert code_only_decision(replace(QUIET, pair_repeats=3)).action is Action.HINT
+    assert code_only_decision(replace(QUIET, cycle_repeats=3)).action is Action.HINT
+    stalled = replace(QUIET, turns_since_change=35, result_repeats=1)
+    assert code_only_decision(stalled).action is Action.HINT
+    # a long read-only session (reviews, research) is not a loop on its own
+    assert code_only_decision(replace(QUIET, turns_since_change=80)).action is Action.CONTINUE
+    assert code_only_decision(replace(QUIET, pair_repeats=2, cycle_repeats=2)).action is Action.CONTINUE

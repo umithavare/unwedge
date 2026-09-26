@@ -37,6 +37,8 @@ class CodeSignals:
     turns_since_change: int  # turns since the last applied edit/write/install
     read_only_streak: int  # consecutive navigate/search turns ending here
     invalid_streak: int  # consecutive turns without a valid action ending here
+    pair_repeats: int = 0  # earlier turns in the window with the same command AND the same result
+    cycle_repeats: int = 1  # how often the last 2-4 (command, result) steps repeat back to back
 
 
 @dataclass(frozen=True)
@@ -45,6 +47,7 @@ class _Prepared:
     result_fp: str
     result_shingles: frozenset[str]
     error_sig: str | None
+    informative: bool  # the result is evidence about the world (see _informative)
 
 
 class SignalTracker:
@@ -84,7 +87,18 @@ def _prepare(turn: Turn) -> _Prepared:
         result_fp=fingerprint(turn.observation),
         result_shingles=shingles(turn.observation),
         error_sig=error_signature(turn.observation) if turn.is_error else None,
+        informative=_informative(turn),
     )
+
+
+_EMPTY_RESULTS = {"", "(no output)", "[image]", "(interrupted)"}
+
+
+def _informative(turn: Turn) -> bool:
+    """Whether "the same result again" means anything. An empty or image-only result (a
+    screenshot) says nothing about what changed, and UI tools (MCP servers such as a browser)
+    answer with the same text while the page they act on changes."""
+    return turn.observation.strip() not in _EMPTY_RESULTS and not turn.command.startswith("mcp__")
 
 
 def _signals_at(
@@ -103,6 +117,9 @@ def _signals_at(
         j for j in same_command
         if not any(may_change_state(turns[k]) and prepared[k].command != here.command for k in range(j + 1, i))
     ]
+    # the same command with the same result counts even when edits ran in between: an edit that
+    # leaves the test failing the same way changed nothing that matters
+    same_pair = [j for j in same_command if here.informative and prepared[j].result_fp == here.result_fp]
     return CodeSignals(
         turn=turn.index,
         exact_repeats=len(same_command),
@@ -117,7 +134,28 @@ def _signals_at(
         turns_since_change=turn.index - last_change[i],
         read_only_streak=_streak(turns, i, lambda t: t.tool_class in _READ_ONLY),
         invalid_streak=_streak(turns, i, lambda t: t.tool_class is ToolClass.INVALID),
+        pair_repeats=len(same_pair),
+        cycle_repeats=_cycle_repeats(prepared, i, max(window, 12)),
     )
+
+
+def _cycle_repeats(prepared: Sequence[_Prepared], i: int, lookback: int) -> int:
+    """How many times the last p (command, result) steps repeat back to back, p = 2..4:
+    view, run, view, run, view, run gives 3."""
+    recent = prepared[max(0, i + 1 - lookback):i + 1]
+    keys = [(p.command, p.result_fp) for p in recent]
+    end, best = len(keys), 1
+    for period in (2, 3, 4):
+        block = keys[end - period:end]
+        if len(block) < period or len({command for command, _ in block}) < 2:
+            continue  # a block of one repeated command is a pair repeat, not a cycle
+        if not all(step.informative for step in recent[end - period:end]):
+            continue  # a screenshot-and-scroll cycle can be real progress through a page
+        reps = 1
+        while end - (reps + 1) * period >= 0 and keys[end - (reps + 1) * period:end - reps * period] == block:
+            reps += 1
+        best = max(best, reps)
+    return best
 
 
 def _streak(turns: Sequence[Turn], i: int, predicate) -> int:

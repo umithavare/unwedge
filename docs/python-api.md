@@ -61,6 +61,22 @@ options = ClaudeAgentOptions(hooks={
 })
 ```
 
+## Chat-message traces
+
+If your loop keeps OpenAI-style messages (assistant `tool_calls` answered by `tool` messages),
+SWE-agent function markup or mini-swe-agent bash blocks, convert a whole trace at once:
+
+```python
+from unwedge.adapters.messages import extract_goal, session_turns
+
+turns = session_turns(messages)          # scrubbed Turns; editor, shell and finish calls mapped
+guard = Guard(goal=extract_goal(messages), provider=None)
+outcomes = [guard.on_turn(turn) for turn in turns]
+```
+
+`unwedge.dataset` reads and writes the session format used by the benchmark and by
+`unwedge export` ([docs/dataset.md](dataset.md)).
+
 ## Replaying recorded sessions
 
 ```python

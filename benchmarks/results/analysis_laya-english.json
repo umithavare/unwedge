@@ -7,11 +7,11 @@
   },
   "report_policy": {
     "full": {
-      "catch": 0.6,
+      "catch": 0.8,
       "false_alarm": 0.0,
-      "savings": 0.5108818652915069,
-      "position": 0.576271186440678,
-      "turns_saved": 12.8,
+      "savings": 0.6777880593415877,
+      "position": 0.5808185200496072,
+      "turns_saved": 16.2,
       "wrong_alarm_rate": NaN,
       "false_alarm_count": 0,
       "messages": {
@@ -20,8 +20,8 @@
           "per_session": 0.0
         },
         "burn": {
-          "sessions_with_any": 0.6,
-          "per_session": 2.0
+          "sessions_with_any": 0.8,
+          "per_session": 3.4
         }
       }
     },
@@ -45,11 +45,11 @@
       }
     },
     "code_tier_only": {
-      "catch": 0.6,
+      "catch": 0.8,
       "false_alarm": 0.0,
-      "savings": 0.5108818652915069,
-      "position": 0.576271186440678,
-      "turns_saved": 12.8,
+      "savings": 0.6777880593415877,
+      "position": 0.5808185200496072,
+      "turns_saved": 16.2,
       "wrong_alarm_rate": NaN,
       "false_alarm_count": 0,
       "messages": {
@@ -58,8 +58,8 @@
           "per_session": 0.0
         },
         "burn": {
-          "sessions_with_any": 0.6,
-          "per_session": 2.0
+          "sessions_with_any": 0.8,
+          "per_session": 3.4
         }
       }
     },
@@ -92,7 +92,7 @@
       "pivot": false
     },
     "jev_brake": {
-      "catch_gain_points": -60.0,
+      "catch_gain_points": -80.0,
       "earlier_turns": NaN,
       "hybrid_false_alarm": 0.0,
       "continue": false,
@@ -159,24 +159,24 @@
         },
         "logistic_code": {
           "catch": 0.68,
-          "false_alarm": 0.2,
-          "savings": 0.664052019240468,
-          "position": 0.22653989251756923,
-          "turns_saved": 19.359999999999996,
+          "false_alarm": 0.24000000000000005,
+          "savings": 0.6607486493216662,
+          "position": 0.21919525974920764,
+          "turns_saved": 19.32,
           "catch_sd": 0.09797958971132716,
-          "false_alarm_sd": 0.0,
-          "savings_sd": 0.08759920116062819,
+          "false_alarm_sd": 0.08,
+          "savings_sd": 0.08793045014361954,
           "wrong_alarm_rate": 0.0
         },
         "logistic_code_jev": {
           "catch": 0.5599999999999999,
           "false_alarm": 0.24000000000000005,
-          "savings": 0.4886229385212831,
-          "position": 0.2617006027986501,
-          "turns_saved": 13.279999999999998,
+          "savings": 0.4682731648426467,
+          "position": 0.2748465308681003,
+          "turns_saved": 12.6,
           "catch_sd": 0.07999999999999999,
           "false_alarm_sd": 0.08,
-          "savings_sd": 0.06580452798103026,
+          "savings_sd": 0.053687522768557545,
           "wrong_alarm_rate": 0.0
         }
       },
@@ -351,29 +351,29 @@
         ],
         "logistic_code": [
           {
-            "tau": 0.43778923518486434,
+            "tau": 0.43590768410988534,
             "consecutive": 1
           },
           {
-            "tau": 0.6629184841789862,
+            "tau": 0.672473180305126,
             "consecutive": 1
           },
           {
-            "tau": 0.7226307472111456,
+            "tau": 0.7308877140886901,
             "consecutive": 1
           }
         ],
         "logistic_code_jev": [
           {
-            "tau": 0.4059575886269986,
+            "tau": 0.41941076368850627,
             "consecutive": 1
           },
           {
-            "tau": 0.6789535685829325,
+            "tau": 0.693652565215601,
             "consecutive": 1
           },
           {
-            "tau": 0.7289425192140603,
+            "tau": 0.7436847487276415,
             "consecutive": 1
           }
         ]
@@ -438,24 +438,24 @@
         },
         "logistic_code": {
           "catch": 0.68,
-          "false_alarm": 0.2,
-          "savings": 0.664052019240468,
-          "position": 0.22653989251756923,
-          "turns_saved": 19.359999999999996,
+          "false_alarm": 0.24000000000000005,
+          "savings": 0.6607486493216662,
+          "position": 0.21919525974920764,
+          "turns_saved": 19.32,
           "catch_sd": 0.09797958971132716,
-          "false_alarm_sd": 0.0,
-          "savings_sd": 0.08759920116062819,
+          "false_alarm_sd": 0.08,
+          "savings_sd": 0.08793045014361954,
           "wrong_alarm_rate": 0.0
         },
         "logistic_code_jev": {
           "catch": 0.5599999999999999,
           "false_alarm": 0.24000000000000005,
-          "savings": 0.4886229385212831,
-          "position": 0.2617006027986501,
-          "turns_saved": 13.279999999999998,
+          "savings": 0.4682731648426467,
+          "position": 0.2748465308681003,
+          "turns_saved": 12.6,
           "catch_sd": 0.07999999999999999,
           "false_alarm_sd": 0.08,
-          "savings_sd": 0.06580452798103026,
+          "savings_sd": 0.053687522768557545,
           "wrong_alarm_rate": 0.0
         }
       },
@@ -630,29 +630,29 @@
         ],
         "logistic_code": [
           {
-            "tau": 0.43778923518486434,
+            "tau": 0.43590768410988534,
             "consecutive": 1
           },
           {
-            "tau": 0.6629184841789862,
+            "tau": 0.672473180305126,
             "consecutive": 1
           },
           {
-            "tau": 0.7226307472111456,
+            "tau": 0.7308877140886901,
             "consecutive": 1
           }
         ],
         "logistic_code_jev": [
           {
-            "tau": 0.4059575886269986,
+            "tau": 0.41941076368850627,
             "consecutive": 1
           },
           {
-            "tau": 0.6789535685829325,
+            "tau": 0.693652565215601,
             "consecutive": 1
           },
           {
-            "tau": 0.7289425192140603,
+            "tau": 0.7436847487276415,
             "consecutive": 1
           }
         ]
@@ -717,24 +717,24 @@
         },
         "logistic_code": {
           "catch": 0.68,
-          "false_alarm": 0.2,
-          "savings": 0.664052019240468,
-          "position": 0.22653989251756923,
-          "turns_saved": 19.359999999999996,
+          "false_alarm": 0.24000000000000005,
+          "savings": 0.6607486493216662,
+          "position": 0.21919525974920764,
+          "turns_saved": 19.32,
           "catch_sd": 0.09797958971132716,
-          "false_alarm_sd": 0.0,
-          "savings_sd": 0.08759920116062819,
+          "false_alarm_sd": 0.08,
+          "savings_sd": 0.08793045014361954,
           "wrong_alarm_rate": 0.0
         },
         "logistic_code_jev": {
           "catch": 0.5599999999999999,
           "false_alarm": 0.24000000000000005,
-          "savings": 0.4886229385212831,
-          "position": 0.2617006027986501,
-          "turns_saved": 13.279999999999998,
+          "savings": 0.4682731648426467,
+          "position": 0.2748465308681003,
+          "turns_saved": 12.6,
           "catch_sd": 0.07999999999999999,
           "false_alarm_sd": 0.08,
-          "savings_sd": 0.06580452798103026,
+          "savings_sd": 0.053687522768557545,
           "wrong_alarm_rate": 0.0
         }
       },
@@ -909,29 +909,29 @@
         ],
         "logistic_code": [
           {
-            "tau": 0.43778923518486434,
+            "tau": 0.43590768410988534,
             "consecutive": 1
           },
           {
-            "tau": 0.6629184841789862,
+            "tau": 0.672473180305126,
             "consecutive": 1
           },
           {
-            "tau": 0.7226307472111456,
+            "tau": 0.7308877140886901,
             "consecutive": 1
           }
         ],
         "logistic_code_jev": [
           {
-            "tau": 0.4059575886269986,
+            "tau": 0.41941076368850627,
             "consecutive": 1
           },
           {
-            "tau": 0.6789535685829325,
+            "tau": 0.693652565215601,
             "consecutive": 1
           },
           {
-            "tau": 0.7289425192140603,
+            "tau": 0.7436847487276415,
             "consecutive": 1
           }
         ]
@@ -996,24 +996,24 @@
         },
         "logistic_code": {
           "catch": 0.68,
-          "false_alarm": 0.2,
-          "savings": 0.664052019240468,
-          "position": 0.22653989251756923,
-          "turns_saved": 19.359999999999996,
+          "false_alarm": 0.24000000000000005,
+          "savings": 0.6607486493216662,
+          "position": 0.21919525974920764,
+          "turns_saved": 19.32,
           "catch_sd": 0.09797958971132716,
-          "false_alarm_sd": 0.0,
-          "savings_sd": 0.08759920116062819,
+          "false_alarm_sd": 0.08,
+          "savings_sd": 0.08793045014361954,
           "wrong_alarm_rate": 0.0
         },
         "logistic_code_jev": {
           "catch": 0.5599999999999999,
           "false_alarm": 0.24000000000000005,
-          "savings": 0.4886229385212831,
-          "position": 0.2617006027986501,
-          "turns_saved": 13.279999999999998,
+          "savings": 0.4682731648426467,
+          "position": 0.2748465308681003,
+          "turns_saved": 12.6,
           "catch_sd": 0.07999999999999999,
           "false_alarm_sd": 0.08,
-          "savings_sd": 0.06580452798103026,
+          "savings_sd": 0.053687522768557545,
           "wrong_alarm_rate": 0.0
         }
       },
@@ -1188,29 +1188,29 @@
         ],
         "logistic_code": [
           {
-            "tau": 0.43778923518486434,
+            "tau": 0.43590768410988534,
             "consecutive": 1
           },
           {
-            "tau": 0.6629184841789862,
+            "tau": 0.672473180305126,
             "consecutive": 1
           },
           {
-            "tau": 0.7226307472111456,
+            "tau": 0.7308877140886901,
             "consecutive": 1
           }
         ],
         "logistic_code_jev": [
           {
-            "tau": 0.4059575886269986,
+            "tau": 0.41941076368850627,
             "consecutive": 1
           },
           {
-            "tau": 0.6789535685829325,
+            "tau": 0.693652565215601,
             "consecutive": 1
           },
           {
-            "tau": 0.7289425192140603,
+            "tau": 0.7436847487276415,
             "consecutive": 1
           }
         ]

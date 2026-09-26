@@ -17,9 +17,13 @@ flowchart LR
 ## 1. Code signals (always on, free)
 
 For every turn: how many times the same normalized action ran with nothing changed in between,
-whether the result's fingerprint (timestamps, addresses and temp paths removed) was seen before,
-how often the same error signature came back, consecutive errors, read-only streaks and turns
-since the last applied edit. These catch the classic loop on their own.
+how often the same action gave the same result (even with edits in between: an edit that leaves
+the test failing the same way changed nothing that matters), whether a 2-4 step sequence keeps
+repeating, whether the result's fingerprint (timestamps, addresses and temp paths removed) was
+seen before, how often the same error signature came back, consecutive errors, read-only
+streaks and turns since the last applied edit. Screenshots, empty results and UI tool calls
+never count as "the same result", because their text says nothing about what changed. These
+signals catch the classic loop on their own.
 
 ## 2. Gating
 
